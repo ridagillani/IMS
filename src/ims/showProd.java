@@ -6,12 +6,12 @@ import java.awt.*;
 public class showProd extends JFrame {
     JButton backbutton;
 
-    public showProd(){
+    public showProd() {
         JPanel p1 = new JPanel(null);
 
         backbutton = new JButton("Go Back");
         backbutton.setBounds(300, 200, 130, 60);
-        backbutton.addActionListener(e->{
+        backbutton.addActionListener(e -> {
             this.dispose();
             User backmain = new User();
         });
@@ -21,7 +21,7 @@ public class showProd extends JFrame {
         add(p1);
 
         setTitle("Inventory Management System");
-        setSize(1280,720);
+        setSize(1280, 720);
         setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -31,8 +31,8 @@ public class showProd extends JFrame {
         this.setIconImage(image.getImage());
 
 
-
     }
 }
+//chutti kar
 
 
