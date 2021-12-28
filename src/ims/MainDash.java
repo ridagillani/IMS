@@ -26,8 +26,6 @@ public class MainDash extends JPanel {
         stock.add(stockLabel);
         stock.add(stockAmount);
 
-
-
         JLabel soldLabel = new JLabel();
         soldLabel.setText("Sold Items: ");
         soldLabel.setFont(new Font("Gilroy", Font.BOLD,20));

@@ -7,34 +7,29 @@ public class Product extends JPanel {
 
     public Product()
     {
-        setBackground(Color.blue);
-        setLayout(new GridBagLayout());
-        JLabel heading = new JLabel();
-        heading.setText("Manage Products");
-        heading.setForeground(Color.WHITE);
-        heading.setBackground(Color.darkGray);
-        heading.setFont(new Font("Cinzel", Font.BOLD, 30));
-        add(heading);
-//        setTitle("Manage Products");
-//        setSize(1280, 720);
-//        setVisible(true);
-//        setResizable(false);
-//        setLayout(new BorderLayout());
-//        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        setBackground(Color.white);
 
-//        JPanel headerp = new JPanel();
-//        headerp.setBackground(Color.darkGray);
-//        headerp.setPreferredSize(new Dimension(1280,150));
-//        add(headerp, BorderLayout.NORTH);
-//
-//        JButton back = new JButton();
-//        back.setText("Back");
-//        back.setBounds(530, 246, 125, 60);
-//        back.setBackground(Color.WHITE);
-//        back.setForeground(Color.darkGray);
-//        back.setFont(new Font("Cinzel", Font.BOLD, 15));
-//        add(back,BorderLayout.SOUTH);
-//        back.addActionListener(new Back());
+        JButton New = new JButton();
+        New.setText("Add New Product");
+        New.setSize(125,60);
+        New.setForeground(Color.darkGray);
+        New.setBackground(Color.white);
+
+        JButton remove = new JButton();
+        remove.setText("Remove Product");
+        remove.setSize(125,60);
+        remove.setForeground(Color.darkGray);
+        remove.setBackground(Color.white);
+
+        JButton update = new JButton();
+        update.setText("Edit Product");
+        update.setSize(125,60);
+        update.setForeground(Color.darkGray);
+        update.setBackground(Color.white);
+
+        add(New);
+        add(remove);
+        add(update);
 
     }
 
