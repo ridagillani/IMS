@@ -3,7 +3,7 @@ package ims;
 import javax.swing.*;
 import java.awt.*;
 
-public class bookProd extends JFrame {
+public class bookProd extends JPanel {
     JButton AddtoCart;
     JButton backbutton;
     public bookProd(){
@@ -12,7 +12,7 @@ public class bookProd extends JFrame {
         backbutton = new JButton("Go Back");
         backbutton.setBounds(300, 200, 130, 60);
         backbutton.addActionListener(e->{
-            this.dispose();
+
             User backmain = new User();
         });
         backbutton.setBackground(Color.LIGHT_GRAY);
@@ -24,15 +24,7 @@ public class bookProd extends JFrame {
         bookprod.add(AddtoCart);
         add(bookprod);
 
-        setTitle("Inventory Management System");
-        setSize(1280,720);
-        setVisible(true);
-        setResizable(false);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        //       this.getContentPane().setBackground(Color.darkGray);
 
-        ImageIcon image = new ImageIcon("shireeen.png");
-        setIconImage(image.getImage());
     }
 
 }

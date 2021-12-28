@@ -7,10 +7,11 @@ import java.awt.event.ActionListener;
 
 public class User extends JFrame {
     JPanel userPanel = new userWelcome();
-    JPanel productPanel = new Product();
-    JPanel inventoryPanel = new Inventory();
-    JPanel transPanel = new Transactions();
-    JPanel orderPanel = new Orders();
+    JPanel seePanel = new showProd();
+    JPanel bookPanel = new bookProd();
+    JPanel cartPanel = new carbutton();
+
+
 
     String current = "welcome";
 
@@ -40,10 +41,15 @@ public class User extends JFrame {
         manage.setForeground(Color.darkGray);
         manage.setBackground(Color.white);
 
-        manage.addActionListener(e-> {
-                    this.dispose();
-                    showProd backmain = new showProd();
-                });
+        JButton logout = new JButton();
+        logout.setText("Exit");
+        logout.setForeground(Color.darkGray);
+        logout.setBackground(Color.white);
+        logout.addActionListener(e -> {
+            dispose();
+            new NewPage();
+        });
+
 
         JButton stock = new JButton();
         stock.setText("Book Products");
@@ -61,11 +67,11 @@ public class User extends JFrame {
         dashboard.setForeground(Color.darkGray);
         dashboard.setBackground(Color.white);
 
-//        manage.addActionListener(new User.UserAction());
-//        stock.addActionListener(new User.UserAction());
-//        orders.addActionListener(new User.UserAction());
-//        dashboard.addActionListener(new User.UserAction());
-//
+        manage.addActionListener(new User.UserAction());
+        stock.addActionListener(new User.UserAction());
+        orders.addActionListener(new User.UserAction());
+        dashboard.addActionListener(new User.UserAction());
+
 
         Container dashLabel = new Container();
         dashLabel.setLayout(new GridBagLayout());
@@ -77,6 +83,7 @@ public class User extends JFrame {
         navigation.add(manage);
         navigation.add(stock);
         navigation.add(orders);
+        navigation.add(logout);
         navigation.setBounds(200,200,400,30);
 
         header.add(dashLabel);
@@ -86,172 +93,125 @@ public class User extends JFrame {
 
     }
 
-//    class UserAction implements ActionListener {
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            if (e.getActionCommand().equalsIgnoreCase("See Products")) {
-//                if (current == "dash")
-//                {
-//                    remove(dashPanel);
-//                }
-//
-//                else if (current == "manage")
-//                {
-//                    remove(productPanel);
-//                }
-//
-//                else if (current == "orders")
-//                {
-//                    remove(orderPanel);
-//                }
-//
-//                else if (current == "stock")
-//                {
-//                    remove(inventoryPanel);
-//                }
-//
-//                else if (current == "transactions")
-//                {
-//                    remove(transPanel);
-//                }
-//
-//                add(productPanel, BorderLayout.CENTER);
-//                current = "manage";
-//                revalidate();
-//                repaint();
-//            }
-//
-//            else if (e.getActionCommand().equalsIgnoreCase("Check Stock"))
-//            {
-//                if (current == "dash")
-//                {
-//                    remove(dashPanel);
-//                }
-//
-//                else if (current == "manage")
-//                {
-//                    remove(productPanel);
-//                }
-//
-//                else if (current == "orders")
-//                {
-//                    remove(orderPanel);
-//                }
-//
-//                else if (current == "stock")
-//                {
-//                    remove(inventoryPanel);
-//                }
-//
-//                else if (current == "transactions")
-//                {
-//                    remove(transPanel);
-//                }
-//
-//                add(inventoryPanel, BorderLayout.CENTER);
-//                current = "stock";
-//                revalidate();
-//                repaint();
-//            }
-//
-//            else if (e.getActionCommand().equalsIgnoreCase("Check Transactions"))
-//            {
-//                if (current == "dash")
-//                {
-//                    remove(dashPanel);
-//                }
-//
-//                else if (current == "manage")
-//                {
-//                    remove(productPanel);
-//                }
-//
-//                else if (current == "orders")
-//                {
-//                    remove(orderPanel);
-//                }
-//
-//                else if (current == "stock")
-//                {
-//                    remove(inventoryPanel);
-//                }
-//
-//                else if (current == "transactions")
-//                {
-//                    remove(transPanel);
-//                }
-//
-//                add(transPanel, BorderLayout.CENTER);
-//                current = "transactions";
-//                revalidate();
-//                repaint();
-//            }
-//
-//            else if (e.getActionCommand().equalsIgnoreCase("Check Orders"))
-//            {
-//                if (current == "dash")
-//                {
-//                    remove(dashPanel);
-//                }
-//
-//                else if (current == "manage")
-//                {
-//                    remove(productPanel);
-//                }
-//
-//                else if (current == "orders")
-//                {
-//                    remove(orderPanel);
-//                }
-//
-//                else if (current == "stock")
-//                {
-//                    remove(inventoryPanel);
-//                }
-//
-//                else if (current == "transactions")
-//                {
-//                    remove(transPanel);
-//                }
-//
-//                add(orderPanel, BorderLayout.CENTER);
-//                current = "orders";
-//                revalidate();
-//                repaint();
-//            }
-//
-//            else if (e.getActionCommand().equalsIgnoreCase("Dashboard"))
-//            {
-//                if (current == "dash")
-//                {
-//                    remove(dashPanel);
-//                }
-//
-//                else if (current == "manage")
-//                {
-//                    remove(productPanel);
-//                }
-//
-//                else if (current == "orders")
-//                {
-//                    remove(orderPanel);
-//                }
-//
-//                else if (current == "stock")
-//                {
-//                    remove(inventoryPanel);
-//                }
-//
-//                else if (current == "transactions")
-//                {
-//                    remove(transPanel);
-//                }
-//
-//                add(dashPanel, BorderLayout.CENTER);
-//                current = "dash";
-//                revalidate();
-//                repaint();
-//            }
-//        }
-//    }
+    class UserAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getActionCommand().equalsIgnoreCase("See Products")) {
+                if (current == "welcome")
+                {
+                    remove(userPanel);
+                }
+
+                else if (current == "see")
+                {
+                    remove(seePanel);
+                }
+
+
+                else if (current == "book")
+                {
+                    remove(bookPanel);
+                }
+
+                else if (current == "cart")
+                {
+                    remove(cartPanel);
+                }
+
+                add(seePanel, BorderLayout.CENTER);
+                current = "see";
+                revalidate();
+                repaint();
+            }
+
+            else if (e.getActionCommand().equalsIgnoreCase("Book Products"))
+            {
+                if (current == "welcome")
+                {
+                    remove(userPanel);
+                }
+
+                else if (current == "see")
+                {
+                    remove(seePanel);
+                }
+
+
+                else if (current == "book")
+                {
+                    remove(bookPanel);
+                }
+
+                else if (current == "cart")
+                {
+                    remove(cartPanel);
+                }
+
+
+                add(bookPanel, BorderLayout.CENTER);
+                current = "book";
+                revalidate();
+                repaint();
+            }
+
+            else if (e.getActionCommand().equalsIgnoreCase("Check Cart"))
+            {
+                if (current == "welcome")
+                {
+                    remove(userPanel);
+                }
+
+                else if (current == "see")
+                {
+                    remove(seePanel);
+                }
+
+
+                else if (current == "book")
+                {
+                    remove(bookPanel);
+                }
+
+                else if (current == "cart")
+                {
+                    remove(cartPanel);
+                }
+
+                add(cartPanel, BorderLayout.CENTER);
+                current = "cart";
+                revalidate();
+                repaint();
+            }
+
+
+            else if (e.getActionCommand().equalsIgnoreCase("Dashboard"))
+            {
+                if (current == "welcome")
+                {
+                    remove(userPanel);
+                }
+
+                else if (current == "see")
+                {
+                    remove(seePanel);
+                }
+
+
+                else if (current == "book")
+                {
+                    remove(bookPanel);
+                }
+
+                else if (current == "cart")
+                {
+                    remove(cartPanel);
+                }
+
+                add(userPanel, BorderLayout.CENTER);
+                current = "welcome";
+                revalidate();
+                repaint();
+            }
+        }
+    }
 }
