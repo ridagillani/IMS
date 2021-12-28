@@ -28,15 +28,38 @@ public class Product extends JPanel {
         update.setForeground(Color.darkGray);
         update.setBackground(Color.white);
 
+        JButton view = new JButton();
+        view.setText("View Products");
+        view.setSize(125,60);
+        view.setForeground(Color.darkGray);
+        view.setBackground(Color.white);
+
         Container buttons = new Container();
-        buttons.setLayout(new GridLayout(3,1,0,10));
+        buttons.setLayout(new GridLayout(4,1,0,10));
         buttons.setBounds(0,0,100,100);
 
         buttons.add(New);
         buttons.add(remove);
         buttons.add(update);
+        buttons.add(view);
+
+//        String[] columns = {
+//                "Product ID", "Product Name", "Stock Quantity", "Price"
+//        };
+//
+//        String[][] data = {
+//                { "0" , "1" , "2"} , { "Aseel Dates" , "Sohan Halwa" , "Desi Cashew" } ,
+//                { "20 kg" , "15 kg" , "40 kg" } , { "Rs 7,000" , "Rs 15,000" , "Rs 20,000"  }
+//        };
+
+       // JTable table = new JTable(data , columns);
+//        table.setBounds(30, 40, 800, 800);
+//
+//        JScrollPane sp = new JScrollPane(table);
+//        add(sp);
 
         add(buttons,BorderLayout.WEST);
+   //     add(table, BorderLayout.CENTER);
 
     }
 
@@ -49,3 +72,5 @@ public class Product extends JPanel {
 //        }
 //    }
 }
+
+
