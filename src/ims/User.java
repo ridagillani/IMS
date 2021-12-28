@@ -2,72 +2,257 @@ package ims;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class User extends JFrame {
-    JButton prodbutton;
-    JButton carbutton;
-    JButton bookbutton;
-    JButton backbutton;
+    JPanel dashPanel = new MainDash();
+    JPanel productPanel = new Product();
+    JPanel inventoryPanel = new Inventory();
+    JPanel transPanel = new Transactions();
+    JPanel orderPanel = new Orders();
+
+    String current = "dash";
+
     public User()
     {
-
-
-
-
-        JPanel panel = new JPanel(null);
-
-        prodbutton = new JButton("Show products");
-        bookbutton = new JButton("Book");
-        carbutton = new JButton("Cart");
-        backbutton = new JButton("Back");
-
-        prodbutton.setBounds(50, 20, 130, 60);
-        bookbutton.setBounds(300, 20, 130, 60);
-        carbutton.setBounds(50, 200, 130, 60);
-        backbutton.setBounds(300, 200, 130, 60);
-
-        prodbutton.setBackground(Color.LIGHT_GRAY);
-        prodbutton.addActionListener(e->{
-            this.dispose();
-            showProd showprod = new showProd();
-        });
-        bookbutton.addActionListener(e->{
-            this.dispose();
-            bookProd showprod = new bookProd();
-        });
-        carbutton.addActionListener(e-> {
-            this.dispose();
-            carbutton showprod = new carbutton();
-        });
-        backbutton.addActionListener(e->{
-            this.dispose();
-            NewPage main = new NewPage();
-        });
-        bookbutton.setBackground(Color.LIGHT_GRAY);
-//        bookbutton.addActionListener(new myHandler());
-        carbutton.setBackground(Color.LIGHT_GRAY);
-//        carbutton.addActionListener(new myHandler());
-        backbutton.setBackground(Color.LIGHT_GRAY);
-//        backbutton.addActionListener(new myHandler());
-
-        panel.add(prodbutton);
-        panel.add(bookbutton);
-        panel.add(carbutton);
-        panel.add(backbutton);
-
-
-        add(panel);
-
-        setTitle("Inventory Management System");
+        setTitle("Admin Dashboard");
         setSize(1280,720);
         setVisible(true);
         setResizable(false);
+        setLayout(new BorderLayout());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        this.getContentPane().setBackground(Color.DARK_GRAY);
 
-        ImageIcon image = new ImageIcon("shireeen.png");
-        setIconImage(image.getImage());
+        JPanel header = new JPanel();
+        header.setBackground(Color.DARK_GRAY);
+        header.setLayout(new GridLayout(1,2,0,10));
+        header.setPreferredSize(new Dimension(1280,100));
+
+        JLabel heading = new JLabel();
+        heading.setText("Inventory Management System");
+        heading.setForeground(Color.WHITE);
+        heading.setBackground(Color.darkGray);
+        heading.setFont(new Font("Cinzel", Font.BOLD, 30));
+
+        JButton manage = new JButton();
+        manage.setText("Manage Products");
+        manage.setSize(125,60);
+        manage.setForeground(Color.darkGray);
+        manage.setBackground(Color.white);
+
+        JButton stock = new JButton();
+        stock.setText("Check Stock");
+        stock.setForeground(Color.darkGray);
+        stock.setBackground(Color.white);
+
+        JButton orders = new JButton();
+        orders.setText("Check Orders");
+        orders.setForeground(Color.darkGray);
+        orders.setBackground(Color.white);
+
+        JButton transactions = new JButton();
+        transactions.setText("Check Transactions");
+        transactions.setForeground(Color.darkGray);
+        transactions.setBackground(Color.white);
+
+        JButton dashboard = new JButton();
+        dashboard.setText("Dashboard");
+        dashboard.setForeground(Color.darkGray);
+        dashboard.setBackground(Color.white);
+
+        manage.addActionListener(new User.UserAction());
+        transactions.addActionListener(new User.UserAction());
+        stock.addActionListener(new User.UserAction());
+        orders.addActionListener(new User.UserAction());
+        dashboard.addActionListener(new User.UserAction());
+
+
+        Container dashLabel = new Container();
+        dashLabel.setLayout(new GridBagLayout());
+        dashLabel.add(heading);
+
+        Container navigation = new Container();
+        navigation.setLayout(new GridBagLayout());
+        navigation.add(dashboard);
+        navigation.add(manage);
+        navigation.add(stock);
+        navigation.add(orders);
+        navigation.add(transactions);
+        navigation.setBounds(200,200,400,30);
+
+        header.add(dashLabel);
+        header.add(navigation);
+        add(header, BorderLayout.NORTH);
+        add(dashPanel, BorderLayout.CENTER);
 
     }
-    }
 
+    class UserAction implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (e.getActionCommand().equalsIgnoreCase("Manage Products")) {
+                if (current == "dash")
+                {
+                    remove(dashPanel);
+                }
+
+                else if (current == "manage")
+                {
+                    remove(productPanel);
+                }
+
+                else if (current == "orders")
+                {
+                    remove(orderPanel);
+                }
+
+                else if (current == "stock")
+                {
+                    remove(inventoryPanel);
+                }
+
+                else if (current == "transactions")
+                {
+                    remove(transPanel);
+                }
+
+                add(productPanel, BorderLayout.CENTER);
+                current = "manage";
+                revalidate();
+                repaint();
+            }
+
+            else if (e.getActionCommand().equalsIgnoreCase("Check Stock"))
+            {
+                if (current == "dash")
+                {
+                    remove(dashPanel);
+                }
+
+                else if (current == "manage")
+                {
+                    remove(productPanel);
+                }
+
+                else if (current == "orders")
+                {
+                    remove(orderPanel);
+                }
+
+                else if (current == "stock")
+                {
+                    remove(inventoryPanel);
+                }
+
+                else if (current == "transactions")
+                {
+                    remove(transPanel);
+                }
+
+                add(inventoryPanel, BorderLayout.CENTER);
+                current = "stock";
+                revalidate();
+                repaint();
+            }
+
+            else if (e.getActionCommand().equalsIgnoreCase("Check Transactions"))
+            {
+                if (current == "dash")
+                {
+                    remove(dashPanel);
+                }
+
+                else if (current == "manage")
+                {
+                    remove(productPanel);
+                }
+
+                else if (current == "orders")
+                {
+                    remove(orderPanel);
+                }
+
+                else if (current == "stock")
+                {
+                    remove(inventoryPanel);
+                }
+
+                else if (current == "transactions")
+                {
+                    remove(transPanel);
+                }
+
+                add(transPanel, BorderLayout.CENTER);
+                current = "transactions";
+                revalidate();
+                repaint();
+            }
+
+            else if (e.getActionCommand().equalsIgnoreCase("Check Orders"))
+            {
+                if (current == "dash")
+                {
+                    remove(dashPanel);
+                }
+
+                else if (current == "manage")
+                {
+                    remove(productPanel);
+                }
+
+                else if (current == "orders")
+                {
+                    remove(orderPanel);
+                }
+
+                else if (current == "stock")
+                {
+                    remove(inventoryPanel);
+                }
+
+                else if (current == "transactions")
+                {
+                    remove(transPanel);
+                }
+
+                add(orderPanel, BorderLayout.CENTER);
+                current = "orders";
+                revalidate();
+                repaint();
+            }
+
+            else if (e.getActionCommand().equalsIgnoreCase("Dashboard"))
+            {
+                if (current == "dash")
+                {
+                    remove(dashPanel);
+                }
+
+                else if (current == "manage")
+                {
+                    remove(productPanel);
+                }
+
+                else if (current == "orders")
+                {
+                    remove(orderPanel);
+                }
+
+                else if (current == "stock")
+                {
+                    remove(inventoryPanel);
+                }
+
+                else if (current == "transactions")
+                {
+                    remove(transPanel);
+                }
+
+                add(dashPanel, BorderLayout.CENTER);
+                current = "dash";
+                revalidate();
+                repaint();
+            }
+        }
+    }
+}
