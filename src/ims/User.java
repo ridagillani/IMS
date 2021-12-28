@@ -41,7 +41,7 @@ public class User extends JFrame {
         });
         backbutton.addActionListener(e->{
             this.dispose();
-            mainFrame main = new mainFrame();
+            NewPage main = new NewPage();
         });
         bookbutton.setBackground(Color.LIGHT_GRAY);
 //        bookbutton.addActionListener(new myHandler());
@@ -70,4 +70,4 @@ public class User extends JFrame {
 
     }
     }
-}
+
