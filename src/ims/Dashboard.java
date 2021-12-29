@@ -51,10 +51,14 @@ public class Dashboard extends JFrame
         orders.setForeground(Color.darkGray);
         orders.setBackground(Color.white);
 
-        JButton transactions = new JButton();
-        transactions.setText("Check Transactions");
-        transactions.setForeground(Color.darkGray);
-        transactions.setBackground(Color.white);
+        JButton backbutton = new JButton();
+        backbutton.setText("Log Out");
+        backbutton.setForeground(Color.darkGray);
+        backbutton.setBackground(Color.white);
+        backbutton.addActionListener(e -> {
+            dispose();
+            new NewPage();
+        });
 
         JButton dashboard = new JButton();
         dashboard.setText("Dashboard");
@@ -62,7 +66,7 @@ public class Dashboard extends JFrame
         dashboard.setBackground(Color.white);
 
         manage.addActionListener(new DashAction());
-        transactions.addActionListener(new DashAction());
+        backbutton.addActionListener(new DashAction());
         stock.addActionListener(new DashAction());
         orders.addActionListener(new DashAction());
         dashboard.addActionListener(new DashAction());
@@ -78,7 +82,7 @@ public class Dashboard extends JFrame
         navigation.add(manage);
         navigation.add(stock);
         navigation.add(orders);
-        navigation.add(transactions);
+        navigation.add(backbutton);
         navigation.setBounds(200,200,400,30);
 
         header.add(dashLabel);
@@ -112,10 +116,6 @@ public class Dashboard extends JFrame
                     remove(inventoryPanel);
                 }
 
-                else if (current == "transactions")
-                {
-                    remove(transPanel);
-                }
 
                 add(productPanel, BorderLayout.CENTER);
                 current = "manage";
