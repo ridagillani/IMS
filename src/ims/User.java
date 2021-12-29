@@ -12,7 +12,6 @@ public class User extends JFrame {
     JPanel cartPanel = new carbutton();
 
 
-
     String current = "welcome";
 
     public User()
