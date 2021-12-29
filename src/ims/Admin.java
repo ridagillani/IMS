@@ -46,6 +46,7 @@ public class Admin extends JFrame {
         login.setText("SUBMIT");
         login.setBackground(Color.WHITE);
         login.addActionListener(new LogIn());
+        login.setFocusable(false);
 
         login.setBounds(440, 400, 400, 30);
         userLabel.setBounds(440, 300, 200, 20);

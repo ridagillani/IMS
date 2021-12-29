@@ -38,6 +38,8 @@ class NewPage extends JFrame
         user.setBackground(Color.WHITE);
         user.setForeground(Color.darkGray);
         user.setFont(new Font("Cinzel", Font.BOLD, 15));
+        user.setFocusable(false);
+
         panel.add(user);
         buttons.add(user);
         user.addActionListener(new Action());
@@ -48,6 +50,8 @@ class NewPage extends JFrame
         admin.setBackground(Color.WHITE);
         admin.setForeground(Color.darkGray);
         admin.setFont(new Font("Cinzel", Font.BOLD, 15));
+        admin.setFocusable(false);
+
         panel.add(admin);
         buttons.add(admin);
         admin.addActionListener(new Action());
