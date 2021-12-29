@@ -62,7 +62,6 @@ public class Dashboard extends JFrame
             new NewPage();
         });
 
-
         dashboard.setText("Dashboard");
         dashboard.setForeground(Color.darkGray);
         dashboard.setBackground(Color.white);

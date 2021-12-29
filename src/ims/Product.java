@@ -156,25 +156,39 @@ class ProductList extends JPanel {
 }
 
 class AddProduct extends JPanel {
-    AddProduct () {
+    public AddProduct()
+    {
+        setLayout(new BorderLayout());
 
         JPanel updatePanel = new JPanel();
-        updatePanel.setLayout(new BorderLayout());
+        updatePanel.setLayout(new GridLayout(5,2));
 
-        JLabel heading = new JLabel("Add Product");
+        JLabel name = new JLabel("Name");
+        JTextField namef = new JTextField(20);
 
-        JLabel l = new JLabel("Add Product");
+        JLabel description = new JLabel("Description");
+        JTextField descriptionf = new JTextField();
 
+        JLabel quantity = new JLabel("Quantity");
+        JTextField quantityf = new JTextField(20);
 
-        updatePanel.add(heading,BorderLayout.NORTH);
-        updatePanel.add(l, BorderLayout.CENTER);
+        JLabel price = new JLabel("Price");
+        JTextField pricef = new JTextField(20);
 
-        add(updatePanel);
+        updatePanel.add(name);
+        updatePanel.add(namef);
+        updatePanel.add(description);
+        updatePanel.add(descriptionf);
+        updatePanel.add(price);
+        updatePanel.add(pricef);
+        updatePanel.add(quantity);
+        updatePanel.add(quantityf);
+
+        add(updatePanel,BorderLayout.CENTER);
     }
 }
-
 class UpdateProduct extends JPanel {
-    UpdateProduct () {
+    UpdateProduct() {
         JLabel n = new JLabel("Edit");
         add(n);
     }
