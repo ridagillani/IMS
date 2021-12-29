@@ -40,17 +40,21 @@ public class Dashboard extends JFrame
         manage.setSize(125,60);
         manage.setForeground(Color.darkGray);
         manage.setBackground(Color.white);
+        manage.setFocusable(false);
 
         JButton stock = new JButton();
         stock.setText("Check Stock");
         stock.setForeground(Color.darkGray);
         stock.setBackground(Color.white);
+        stock.setFocusable(false);
 
         JButton orders = new JButton();
         orders.setText("Check Orders");
         orders.setForeground(Color.darkGray);
         orders.setBackground(Color.white);
+        orders.setFocusable(false);
 
+<<<<<<< Updated upstream
         JButton backbutton = new JButton();
         backbutton.setText("Log Out");
         backbutton.setForeground(Color.darkGray);
@@ -59,18 +63,25 @@ public class Dashboard extends JFrame
             dispose();
             new NewPage();
         });
+=======
+        JButton transactions = new JButton();
+        transactions.setText("Check Transactions");
+        transactions.setForeground(Color.darkGray);
+        transactions.setBackground(Color.white);
+        transactions.setFocusable(false);
+>>>>>>> Stashed changes
 
         JButton dashboard = new JButton();
         dashboard.setText("Dashboard");
         dashboard.setForeground(Color.darkGray);
         dashboard.setBackground(Color.white);
+        dashboard.setFocusable(false);
 
         manage.addActionListener(new DashAction());
         backbutton.addActionListener(new DashAction());
         stock.addActionListener(new DashAction());
         orders.addActionListener(new DashAction());
         dashboard.addActionListener(new DashAction());
-
 
         Container dashLabel = new Container();
         dashLabel.setLayout(new GridBagLayout());
