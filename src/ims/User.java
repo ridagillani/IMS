@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class User extends JFrame {
     JPanel userPanel = new userWelcome();
     JPanel seePanel = new showProd();
-    JPanel bookPanel = new bookProd();
+
     JPanel cartPanel = new carbutton();
 
 
@@ -35,7 +35,7 @@ public class User extends JFrame {
         heading.setFont(new Font("Cinzel", Font.BOLD, 30));
 
         JButton manage = new JButton();
-        manage.setText("See Products");
+        manage.setText("Purchase Now");
         manage.setSize(125,60);
         manage.setForeground(Color.darkGray);
         manage.setBackground(Color.white);
@@ -50,10 +50,6 @@ public class User extends JFrame {
         });
 
 
-        JButton stock = new JButton();
-        stock.setText("Book Products");
-        stock.setForeground(Color.darkGray);
-        stock.setBackground(Color.white);
 
         JButton orders = new JButton();
         orders.setText("Check Cart");
@@ -67,7 +63,7 @@ public class User extends JFrame {
         dashboard.setBackground(Color.white);
 
         manage.addActionListener(new User.UserAction());
-        stock.addActionListener(new User.UserAction());
+
         orders.addActionListener(new User.UserAction());
         dashboard.addActionListener(new User.UserAction());
 
@@ -80,7 +76,7 @@ public class User extends JFrame {
         navigation.setLayout(new GridBagLayout());
         navigation.add(dashboard);
         navigation.add(manage);
-        navigation.add(stock);
+
         navigation.add(orders);
         navigation.add(logout);
         navigation.setBounds(200,200,400,30);
@@ -107,11 +103,6 @@ public class User extends JFrame {
                 }
 
 
-                else if (current == "book")
-                {
-                    remove(bookPanel);
-                }
-
                 else if (current == "cart")
                 {
                     remove(cartPanel);
@@ -123,7 +114,7 @@ public class User extends JFrame {
                 repaint();
             }
 
-            else if (e.getActionCommand().equalsIgnoreCase("Book Products"))
+            else if (e.getActionCommand().equalsIgnoreCase("Purchase Now"))
             {
                 if (current == "welcome")
                 {
@@ -136,21 +127,18 @@ public class User extends JFrame {
                 }
 
 
-                else if (current == "book")
-                {
-                    remove(bookPanel);
-                }
-
                 else if (current == "cart")
                 {
                     remove(cartPanel);
                 }
 
-
-                add(bookPanel, BorderLayout.CENTER);
-                current = "book";
+                add(cartPanel, BorderLayout.CENTER);
+                current = "cart";
                 revalidate();
                 repaint();
+
+
+
             }
 
             else if (e.getActionCommand().equalsIgnoreCase("Check Cart"))
@@ -165,11 +153,6 @@ public class User extends JFrame {
                     remove(seePanel);
                 }
 
-
-                else if (current == "book")
-                {
-                    remove(bookPanel);
-                }
 
                 else if (current == "cart")
                 {
@@ -193,12 +176,6 @@ public class User extends JFrame {
                 else if (current == "see")
                 {
                     remove(seePanel);
-                }
-
-
-                else if (current == "book")
-                {
-                    remove(bookPanel);
                 }
 
                 else if (current == "cart")
