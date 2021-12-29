@@ -5,7 +5,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Dashboard extends JFrame {
+public class Dashboard extends JFrame
+{
     JPanel dashPanel = new MainDash();
     JPanel productPanel = new Product();
     JPanel inventoryPanel = new Inventory();
