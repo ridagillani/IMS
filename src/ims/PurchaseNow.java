@@ -12,14 +12,7 @@ class PurchaseNow extends JPanel
         JPanel p1 = new JPanel();
         setBackground(Color.white);
         setLayout(new BorderLayout());
-
-        JButton addtocart = new JButton();
-        addtocart.setText("ADD TO CART");
-        addtocart.setForeground(Color.darkGray);
-        addtocart.setBackground(Color.white);
-        addtocart.setFocusable(false);
-        addtocart.setBounds(300, 200, 130, 60);
-        p1.add(addtocart);
+        
 
 
         String[] column_name = {
