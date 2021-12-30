@@ -14,39 +14,16 @@ class PurchaseNow extends JPanel
         setLayout(new BorderLayout());
 
 
+        JButton ac = new JButton();
+        ac.setText("Add to Cart");
+        ac.setSize(125,60);
+        ac.setForeground(Color.darkGray);
+        ac.setBackground(Color.white);
 
-        String[] column_name = {
-                "Product ID",
-                "Product Name",
-                "Stock Quantity",
-                "Price"
-        };
 
-        String[][] data = {
-                {"1", "a", "shirt", "300"},
-                {"2", "b", "shirt", "300"},
-                {"3", "c", "shirt", "300"},
-                {"4", "d", "shirt", "300"},
-                {"5", "e", "shirt", "300"},
-                {"6", "f", "shirt", "300"},
-                {"7", "g", "shirt", "300"},
-                {"8", "h", "shirt", "300"},
-                {"9", "i", "shirt", "300"},
-        };
+        p1.add(ac);
+        add(p1, BorderLayout.SOUTH);
 
-        JTable purchaseNow = new JTable(data, column_name);
-
-        purchaseNow.setAutoCreateRowSorter(true); // sorting when clicked on the header
-        purchaseNow.setEnabled(false); // disabling the editing
-        purchaseNow.setRowHeight(35);
-
-        JPanel tableP = new JPanel();
-        tableP.setLayout(new BorderLayout(0,0));
-        tableP.add(purchaseNow.getTableHeader(), BorderLayout.NORTH);
-        tableP.add(purchaseNow, BorderLayout.CENTER);
-
-        tableP.add(purchaseNow);
-        add(tableP , BorderLayout.CENTER);
 
     }
 }

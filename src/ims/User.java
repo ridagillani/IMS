@@ -39,6 +39,7 @@ public class User extends JFrame {
         manage.setSize(125,60);
         manage.setForeground(Color.darkGray);
         manage.setBackground(Color.white);
+        manage.setFocusable(false);
 
         JButton logout = new JButton();
         logout.setText("Exit");
@@ -54,12 +55,14 @@ public class User extends JFrame {
         orders.setText("Check Cart");
         orders.setForeground(Color.darkGray);
         orders.setBackground(Color.white);
+        orders.setFocusable(false);
 
 
         JButton dashboard = new JButton();
         dashboard.setText("Dashboard");
         dashboard.setForeground(Color.darkGray);
         dashboard.setBackground(Color.white);
+        dashboard.setFocusable(false);
 
         manage.addActionListener(new User.UserAction());
         orders.addActionListener(new User.UserAction());
@@ -135,7 +138,7 @@ public class User extends JFrame {
                    remove(cartPanel);
                 }
 
-                //add(cartPanel, BorderLayout.CENTER);
+                add(cartPanel, BorderLayout.CENTER);
                 current = "cart";
                 revalidate();
                 repaint();
