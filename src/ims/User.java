@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 
 public class User extends JFrame {
     JPanel userPanel = new userWelcome();
-    JPanel seePanel = new showProd();
+   // JPanel seePanel = new showProd();
 
-    JPanel cartPanel = new carbutton();
+    //JPanel cartPanel = new carbutton();
 
 
     String current = "welcome";
@@ -99,16 +99,16 @@ public class User extends JFrame {
 
                 else if (current == "see")
                 {
-                    remove(seePanel);
+                  //  remove(seePanel);
                 }
 
 
                 else if (current == "cart")
                 {
-                    remove(cartPanel);
+                //    remove(cartPanel);
                 }
 
-                add(seePanel, BorderLayout.CENTER);
+             //   add(seePanel, BorderLayout.CENTER);
                 current = "see";
                 revalidate();
                 repaint();
@@ -123,16 +123,16 @@ public class User extends JFrame {
 
                 else if (current == "see")
                 {
-                    remove(seePanel);
+                 //   remove(seePanel);
                 }
 
 
                 else if (current == "cart")
                 {
-                    remove(cartPanel);
+                //    remove(cartPanel);
                 }
 
-                add(cartPanel, BorderLayout.CENTER);
+               // add(cartPanel, BorderLayout.CENTER);
                 current = "cart";
                 revalidate();
                 repaint();
@@ -150,16 +150,16 @@ public class User extends JFrame {
 
                 else if (current == "see")
                 {
-                    remove(seePanel);
+                //    remove(seePanel);
                 }
 
 
                 else if (current == "cart")
                 {
-                    remove(cartPanel);
+                //    remove(cartPanel);
                 }
 
-                add(cartPanel, BorderLayout.CENTER);
+                //add(cartPanel, BorderLayout.CENTER);
                 current = "cart";
                 revalidate();
                 repaint();
@@ -175,12 +175,12 @@ public class User extends JFrame {
 
                 else if (current == "see")
                 {
-                    remove(seePanel);
+               //     remove(seePanel);
                 }
 
                 else if (current == "cart")
                 {
-                    remove(cartPanel);
+                //    remove(cartPanel);
                 }
 
                 add(userPanel, BorderLayout.CENTER);
