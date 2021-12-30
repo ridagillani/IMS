@@ -52,13 +52,28 @@ class NewPage extends JFrame
         admin.setFont(new Font("Cinzel", Font.BOLD, 15));
         admin.setFocusable(false);
 
+        JButton exit = new JButton();
+        exit.setText("EXIT PROGRAM");
+        exit.setBounds(1100,600,125,60);
+        exit.setBackground(Color.WHITE);
+        exit.setForeground(Color.darkGray);
+        exit.setFont(new Font("Cinzel", Font.BOLD, 11));
+        exit.setFocusable(false);
+        exit.addActionListener(e -> {
+            System.exit(0);
+        });
+
+
         panel.add(admin);
         buttons.add(admin);
+        panel.add(exit);
+
         admin.addActionListener(new Action());
 
         add(panel);
 
     }
+
 
     class Action implements ActionListener {
         @Override
@@ -73,6 +88,7 @@ class NewPage extends JFrame
                 new Admin();
                 dispose();
             }
+
         }
     }
 }

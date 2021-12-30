@@ -12,7 +12,7 @@ class PurchaseNow extends JPanel
         JPanel p1 = new JPanel();
         setBackground(Color.white);
         setLayout(new BorderLayout());
-        
+
 
 
         String[] column_name = {
