@@ -40,7 +40,7 @@ public class Product {
         return id;
     }
 
-    public void setPname(String name])
+    public void setPname(String name)
     {
         this.name = name;
     }
