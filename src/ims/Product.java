@@ -161,10 +161,16 @@ class AddProduct extends JPanel {
         setLayout(new BorderLayout());
 
         JPanel updatePanel = new JPanel();
-        updatePanel.setLayout(new GridLayout(5,2));
+//        updatePanel.setLayout());
 
         JLabel name = new JLabel("Name");
-        JTextField namef = new JTextField(20);
+        JTextField namef = new JTextField();
+
+        name.setPreferredSize(new Dimension(100,100));
+        namef.setPreferredSize(new Dimension(300,30));
+        
+        name.setBounds(800,50,30,40);
+        namef.setBounds(830,50,30,40);
 
         JLabel description = new JLabel("Description");
         JTextField descriptionf = new JTextField();
