@@ -7,14 +7,15 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class ProductScreen extends JPanel {
+
+    public ArrayList<Product> products = new ArrayList<Product>();
+    fileHandling fileM = new fileHandling();
+
     JPanel productPanel = new ProductList();
     JPanel addProductPanel = new AddProduct();
     JPanel updateProductPanel = new UpdateProduct();
 
     String current = "view";
-
-    ArrayList<Product> products = new ArrayList<>();
-    fileHandling file = new fileHandling();
 
     public ProductScreen() {
         setBackground(Color.white);
@@ -72,9 +73,13 @@ public class ProductScreen extends JPanel {
 
     }
 
+
+
+
     class ProductAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            products = fileM.readProduct();
             if (e.getActionCommand().equalsIgnoreCase("Add New Product")) {
                 if (current == "view") {
                     remove(productPanel);
@@ -105,6 +110,7 @@ public class ProductScreen extends JPanel {
             }
 
             else if (e.getActionCommand().equalsIgnoreCase("View Products")) {
+
                 if (current == "view") {
                     remove(productPanel);
                 } else if (current == "add") {
@@ -112,6 +118,8 @@ public class ProductScreen extends JPanel {
                 } else if (current == "update") {
                     remove(updateProductPanel);
                 }
+
+                productPanel = new ProductList();
 
                 add(productPanel, BorderLayout.CENTER);
                 current = "view";
@@ -129,24 +137,26 @@ public class ProductScreen extends JPanel {
             JPanel viewPanel = new JPanel();
             viewPanel.setLayout(new BorderLayout());
 
+            products = fileM.readProduct();
+
+
             String[] column_name = {
                     "Product ID",
                     "Product Name",
+                    "Product Description",
                     "Stock Quantity",
-                    "Price"
+                    "Product Category",
+                    "Product Price"
             };
 
-            String[][] data = {
-                    {"1", "a", "shirt", "300"},
-                    {"2", "b", "shirt", "300"},
-                    {"3", "c", "shirt", "300"},
-                    {"4", "d", "shirt", "300"},
-                    {"5", "e", "shirt", "300"},
-                    {"6", "f", "shirt", "300"},
-                    {"7", "g", "shirt", "300"},
-                    {"8", "h", "shirt", "300"},
-                    {"9", "i", "shirt", "300"},
-            };
+            String[][] data = new String[products.size()][6];
+
+
+            for (int i=0; i < products.size(); i++) {
+                String[] n = {Integer.toString(products.get(i).getPId()), products.get(i).getPname(), products.get(i).getDescription(), Integer.toString(products.get(i).getPQuantity()), products.get(i).getCategory(), Double.toString(products.get(i).getPrice())};
+                data[i] = n;
+
+            }
 
             // then construct the table
             JTable productable = new JTable(data, column_name);
@@ -189,6 +199,12 @@ public class ProductScreen extends JPanel {
     }
 
     class AddProduct extends JPanel {
+        JTextField namef = new JTextField();
+        JTextField descriptionf = new JTextField();
+        JTextField quantityf = new JTextField(20);
+        JTextField pricef = new JTextField(20);
+        JComboBox j1;
+
         public AddProduct()
         {
             setLayout(new BorderLayout());
@@ -198,31 +214,31 @@ public class ProductScreen extends JPanel {
 
             JLabel name = new JLabel("Name");
             name.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-            JTextField namef = new JTextField();
+
 
             JLabel description = new JLabel("Description");
             description.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-            JTextField descriptionf = new JTextField();
 
             JLabel quantity = new JLabel("Quantity");
             quantity.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-            JTextField quantityf = new JTextField(20);
 
             JLabel price = new JLabel("Price");
             price.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-            JTextField pricef = new JTextField(20);
+
 
             JLabel CategoryLabel = new JLabel("Category");
             CategoryLabel.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
 
-            String[] s1={"Technology","Grocery","Crockery","Clothing" , "Perfumes"};
-            JComboBox j1=new JComboBox(s1);
+
+            String[] s1 = {"Technology","Grocery","Crockery","Clothing" , "Perfumes"};
+            j1 = new JComboBox(s1);
+
 
             JButton add = new JButton();
             add.setText("Add");
             add.setBackground(Color.darkGray);
             add.setForeground(Color.white);
-            add.addActionListener(e -> addProduct());
+            add.addActionListener(e -> addProduct(namef.getText(), descriptionf.getText(), quantityf.getText(), pricef.getText(), j1.getSelectedItem().toString()));
 
             JButton Cancel = new JButton();
             Cancel.setText("Cancel");
@@ -298,17 +314,43 @@ public class ProductScreen extends JPanel {
             add(n4,BorderLayout.SOUTH);
         }
 
-        void addProduct () {
+        void addProduct (String name, String description, String quantity, String price, String category) {
             Product last;
+            int id = 0;
             if (products.size() > 0) {
                 last = products.get(products.size() - 1);
+                id = last.getPId() + 1;
             }
 
-            int id;
+            Product newProd = new Product(id, name, description, Integer.parseInt(quantity), category, Double.parseDouble(price));
+
+            products.add(newProd);
+
+            products = fileM.writeProducts(products);
+
+            namef.setText("");
+            descriptionf.setText("");
+            quantityf.setText("");
+            pricef.setText("");
 
 
-//            Product new_prod = new Product();
+            JFrame f = new JFrame("Product Added");
+            f.setBounds(300,300, 400,100);
+            f.setLayout(new GridLayout(2,1));
+            JLabel l = new JLabel("The product has been added");
+
+            JButton b = new JButton("Okay");
+
+            b.addActionListener(e -> {f.dispose();});
+
+            f.add(l);
+            f.add(b);
+            f.show();
+
+
         }
+
+
     }
 
 

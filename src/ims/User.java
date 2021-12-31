@@ -46,6 +46,7 @@ public class User extends JFrame {
         logout.setForeground(Color.darkGray);
         logout.setBackground(Color.white);
         logout.addActionListener(e -> {
+            dispose();
             new NewPage();
         });
 
