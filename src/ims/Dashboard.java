@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class Dashboard extends JFrame
 {
     JPanel dashPanel = new MainDash();
-    JPanel productPanel = new Product();
+    JPanel productPanel = new ProductScreen();
     JPanel orderPanel = new Orders();
 
     JButton dashboard = new JButton();
@@ -63,10 +63,6 @@ public class Dashboard extends JFrame
 
 
 
-
-
-        JButton dashboard = new JButton();
-
         dashboard.setText("Dashboard");
         dashboard.setForeground(Color.darkGray);
         dashboard.setBackground(Color.white);
@@ -94,6 +90,7 @@ public class Dashboard extends JFrame
         add(dashPanel, BorderLayout.CENTER);
         dashboard.setBackground(Color.gray);
         dashboard.setForeground(Color.WHITE);
+        current = "dash";
 
     }
 
@@ -105,21 +102,21 @@ public class Dashboard extends JFrame
                 {
                     remove(dashPanel);
                     dashboard.setBackground(Color.white);
-                    dashboard.setForeground(Color.black);
+                    dashboard.setForeground(Color.darkGray);
                 }
 
                 else if (current == "manage")
                 {
                     remove(productPanel);
                     manage.setBackground(Color.white);
-                    manage.setForeground(Color.black);
+                    manage.setForeground(Color.darkGray);
                 }
 
                 else if (current == "orders")
                 {
                     remove(orderPanel);
                     orders.setBackground(Color.white);
-                    orders.setForeground(Color.black);
+                    orders.setForeground(Color.darkGray);
                 }
 
 
@@ -139,21 +136,21 @@ public class Dashboard extends JFrame
                 {
                     remove(dashPanel);
                     dashboard.setBackground(Color.white);
-                    dashboard.setForeground(Color.black);
+                    dashboard.setForeground(Color.darkGray);
                 }
 
                 else if (current == "manage")
                 {
                     remove(productPanel);
                     manage.setBackground(Color.white);
-                    manage.setForeground(Color.black);
+                    manage.setForeground(Color.darkGray);
                 }
 
                 else if (current == "orders")
                 {
                     remove(orderPanel);
                     orders.setBackground(Color.white);
-                    orders.setForeground(Color.black);
+                    orders.setForeground(Color.darkGray);
                 }
 
                 add(orderPanel, BorderLayout.CENTER);
@@ -170,21 +167,22 @@ public class Dashboard extends JFrame
                 {
                     remove(dashPanel);
                     dashboard.setBackground(Color.white);
-                    dashboard.setForeground(Color.black);
+                    dashboard.setForeground(Color.darkGray);
+                    System.out.println("Working");
                 }
 
                 else if (current == "manage")
                 {
                     remove(productPanel);
                     manage.setBackground(Color.white);
-                    orders.setForeground(Color.black);
+                    manage.setForeground(Color.darkGray);
                 }
 
                 else if (current == "orders")
                 {
                     remove(orderPanel);
                     orders.setBackground(Color.white);
-                    orders.setForeground(Color.black);
+                    orders.setForeground(Color.darkGray);
                 }
 
                 add(dashPanel, BorderLayout.CENTER);
@@ -194,6 +192,7 @@ public class Dashboard extends JFrame
                 revalidate();
                 repaint();
             }
+
         }
     }
 }
