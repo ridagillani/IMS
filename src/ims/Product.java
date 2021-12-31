@@ -4,9 +4,19 @@ public class Product {
     private String name;
     private String description;
     private int quantity;
-    private String Category;
+    private String category;
     private double price;
-    public Product(){
+
+    public Product()
+    {
         name = null;
+        description = null;
+        quantity = 0;
+        category = null;
+        price = 0.0;
+
     }
+
+
+
 }
