@@ -9,7 +9,7 @@ public class Dashboard extends JFrame
 {
     JPanel dashPanel = new MainDash();
     JPanel productPanel = new ProductScreen();
-    JPanel orderPanel = new Orders();
+    JPanel orderPanel = new OrderScreen();
 
     JButton dashboard = new JButton();
     JButton manage = new JButton();
