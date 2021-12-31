@@ -189,6 +189,8 @@ class ProductList extends JPanel {
     }
 }
 
+
+
 class AddProduct extends JPanel {
     public AddProduct()
     {
@@ -228,9 +230,6 @@ class AddProduct extends JPanel {
         Cancel.setText("Cancel");
         Cancel.setBackground(Color.darkGray);
         Cancel.setForeground(Color.white);
-
-
-
 
         JPanel nameGroup = new JPanel();
         nameGroup.setLayout(new GridLayout(1, 2));
@@ -301,6 +300,8 @@ class AddProduct extends JPanel {
         add(n4,BorderLayout.SOUTH);
     }
 }
+
+
 class UpdateProduct extends JPanel {
     UpdateProduct() {
         setLayout(new BorderLayout());
@@ -330,18 +331,15 @@ class UpdateProduct extends JPanel {
         String[] s1={"Technology","Grocery","Crockery","Clothing" , "Perfumes"};
         JComboBox j1=new JComboBox(s1);
 
-        JButton add = new JButton();
-        add.setText("Add");
-        add.setBackground(Color.darkGray);
-        add.setForeground(Color.white);
+        JButton edit = new JButton();
+        edit.setText("Update");
+        edit.setBackground(Color.darkGray);
+        edit.setForeground(Color.white);
 
         JButton Cancel = new JButton();
         Cancel.setText("Cancel");
         Cancel.setBackground(Color.darkGray);
         Cancel.setForeground(Color.white);
-
-
-
 
         JPanel nameGroup = new JPanel();
         nameGroup.setLayout(new GridLayout(1, 2));
@@ -376,7 +374,7 @@ class UpdateProduct extends JPanel {
         JPanel buttGroup = new JPanel();
         buttGroup.setLayout(new GridLayout(1, 2));
         buttGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        buttGroup.add(add);
+        buttGroup.add(edit);
         buttGroup.add(Cancel);
 
         updatePanel.add(nameGroup);
