@@ -15,6 +15,15 @@ public class Orders {
         amount = 0.0;
     }
 
+    public Orders(int product_id, int order_number, int quantity, double amount)
+    {
+        this.product_id = product_id;
+        this.order_number = order_number;
+        this.quantity = quantity;
+        this.amount = amount;
+
+    }
+
     public void setID(int product_id)
     {
         this.product_id = product_id;
