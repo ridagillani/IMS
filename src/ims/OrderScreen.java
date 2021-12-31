@@ -5,9 +5,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-class Orders extends JPanel
+class OrderScreen extends JPanel
 {
-    Orders()
+    OrderScreen()
     {
         setBackground(Color.white);
         setLayout(new BorderLayout());
