@@ -122,293 +122,305 @@ public class ProductScreen extends JPanel {
         }
     }
 
-}
+    class ProductList extends JPanel {
+        ProductList () {
+            setLayout(new BorderLayout());
 
-class ProductList extends JPanel {
-    ProductList () {
-        setLayout(new BorderLayout());
+            JPanel viewPanel = new JPanel();
+            viewPanel.setLayout(new BorderLayout());
 
-        JPanel viewPanel = new JPanel();
-        viewPanel.setLayout(new BorderLayout());
+            String[] column_name = {
+                    "Product ID",
+                    "Product Name",
+                    "Stock Quantity",
+                    "Price"
+            };
 
-        String[] column_name = {
-                "Product ID",
-                "Product Name",
-                "Stock Quantity",
-                "Price"
-        };
+            String[][] data = {
+                    {"1", "a", "shirt", "300"},
+                    {"2", "b", "shirt", "300"},
+                    {"3", "c", "shirt", "300"},
+                    {"4", "d", "shirt", "300"},
+                    {"5", "e", "shirt", "300"},
+                    {"6", "f", "shirt", "300"},
+                    {"7", "g", "shirt", "300"},
+                    {"8", "h", "shirt", "300"},
+                    {"9", "i", "shirt", "300"},
+            };
 
-        String[][] data = {
-                {"1", "a", "shirt", "300"},
-                {"2", "b", "shirt", "300"},
-                {"3", "c", "shirt", "300"},
-                {"4", "d", "shirt", "300"},
-                {"5", "e", "shirt", "300"},
-                {"6", "f", "shirt", "300"},
-                {"7", "g", "shirt", "300"},
-                {"8", "h", "shirt", "300"},
-                {"9", "i", "shirt", "300"},
-        };
+            // then construct the table
+            JTable productable = new JTable(data, column_name);
 
-        // then construct the table
-        JTable productable = new JTable(data, column_name);
+            // Table configurations
+            productable.setAutoCreateRowSorter(true); // sorting when clicked on the header
+            productable.setEnabled(false); // disabling the editing
 
-        // Table configurations
-        productable.setAutoCreateRowSorter(true); // sorting when clicked on the header
-        productable.setEnabled(false); // disabling the editing
-
-        productable.setRowHeight(35);
-        viewPanel.add(productable.getTableHeader(), BorderLayout.NORTH);
-        viewPanel.add(productable, BorderLayout.CENTER);
+            productable.setRowHeight(35);
+            viewPanel.add(productable.getTableHeader(), BorderLayout.NORTH);
+            viewPanel.add(productable, BorderLayout.CENTER);
 
 
-        JLabel n1 = new JLabel("a");
-        n1.setForeground(Color.darkGray);
-        n1.setFont(new Font("Arial", Font.BOLD,30));
+            JLabel n1 = new JLabel("a");
+            n1.setForeground(Color.darkGray);
+            n1.setFont(new Font("Arial", Font.BOLD,30));
 
-        JLabel n2 = new JLabel("a");
-        n2.setForeground(Color.darkGray);
-        n2.setFont(new Font("Arial", Font.BOLD,80));
+            JLabel n2 = new JLabel("a");
+            n2.setForeground(Color.darkGray);
+            n2.setFont(new Font("Arial", Font.BOLD,80));
 
-        JLabel n3 = new JLabel("a");
-        n3.setForeground(Color.darkGray);
-        n3.setFont(new Font("Arial", Font.BOLD,80));
+            JLabel n3 = new JLabel("a");
+            n3.setForeground(Color.darkGray);
+            n3.setFont(new Font("Arial", Font.BOLD,80));
 
-        JLabel n4 = new JLabel("a");
-        n4.setForeground(Color.darkGray);
-        n4.setFont(new Font("Arial", Font.BOLD,30));
+            JLabel n4 = new JLabel("a");
+            n4.setForeground(Color.darkGray);
+            n4.setFont(new Font("Arial", Font.BOLD,30));
 
-        setBackground(Color.darkGray);
+            setBackground(Color.darkGray);
 
-        add(viewPanel, BorderLayout.CENTER);
-        add(n1, BorderLayout.NORTH);
-        add(n2, BorderLayout.WEST);
-        add(n3, BorderLayout.EAST);
-        add(n4,BorderLayout.SOUTH);
+            add(viewPanel, BorderLayout.CENTER);
+            add(n1, BorderLayout.NORTH);
+            add(n2, BorderLayout.WEST);
+            add(n3, BorderLayout.EAST);
+            add(n4,BorderLayout.SOUTH);
+
+        }
 
     }
-}
+
+    class AddProduct extends JPanel {
+        public AddProduct()
+        {
+            setLayout(new BorderLayout());
+
+            JPanel updatePanel = new JPanel();
+            updatePanel.setLayout(new GridLayout(6,1, 0, 0));
+
+            JLabel name = new JLabel("Name");
+            name.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            JTextField namef = new JTextField();
+
+            JLabel description = new JLabel("Description");
+            description.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            JTextField descriptionf = new JTextField();
+
+            JLabel quantity = new JLabel("Quantity");
+            quantity.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            JTextField quantityf = new JTextField(20);
+
+            JLabel price = new JLabel("Price");
+            price.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            JTextField pricef = new JTextField(20);
+
+            JLabel CategoryLabel = new JLabel("Category");
+            CategoryLabel.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+
+            String[] s1={"Technology","Grocery","Crockery","Clothing" , "Perfumes"};
+            JComboBox j1=new JComboBox(s1);
+
+            JButton add = new JButton();
+            add.setText("Add");
+            add.setBackground(Color.darkGray);
+            add.setForeground(Color.white);
+            add.addActionListener(e -> addProduct());
+
+            JButton Cancel = new JButton();
+            Cancel.setText("Cancel");
+            Cancel.setBackground(Color.darkGray);
+            Cancel.setForeground(Color.white);
+
+            JPanel nameGroup = new JPanel();
+            nameGroup.setLayout(new GridLayout(1, 2));
+            nameGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            nameGroup.add(name);
+            nameGroup.add(namef);
+
+            JPanel descGroup = new JPanel();
+            descGroup.setLayout(new GridLayout(1, 2));
+            descGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            descGroup.add(description);
+            descGroup.add(descriptionf);
+
+            JPanel priceGroup = new JPanel();
+            priceGroup.setLayout(new GridLayout(1, 2));
+            priceGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            priceGroup.add(price);
+            priceGroup.add(pricef);
+
+            JPanel quanGroup = new JPanel();
+            quanGroup.setLayout(new GridLayout(1, 2));
+            quanGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            quanGroup.add(quantity);
+            quanGroup.add(quantityf);
+
+            JPanel catGroup = new JPanel();
+            catGroup.setLayout(new GridLayout(1, 2));
+            catGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            catGroup.add(CategoryLabel);
+            catGroup.add(j1);
+
+            JPanel buttGroup = new JPanel();
+            buttGroup.setLayout(new GridLayout(1, 2));
+            buttGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            buttGroup.add(add);
+            buttGroup.add(Cancel);
+
+            updatePanel.add(nameGroup);
+            updatePanel.add(descGroup);
+            updatePanel.add(priceGroup);
+            updatePanel.add(quanGroup);
+            updatePanel.add(catGroup);
+            updatePanel.add(buttGroup);
+
+            JLabel n1 = new JLabel("a");
+            n1.setForeground(Color.darkGray);
+            n1.setFont(new Font("Arial", Font.BOLD,30));
+
+            JLabel n2 = new JLabel("a");
+            n2.setForeground(Color.darkGray);
+            n2.setFont(new Font("Arial", Font.BOLD,80));
+
+            JLabel n3 = new JLabel("a");
+            n3.setForeground(Color.darkGray);
+            n3.setFont(new Font("Arial", Font.BOLD,80));
+
+            JLabel n4 = new JLabel("a");
+            n4.setForeground(Color.darkGray);
+            n4.setFont(new Font("Arial", Font.BOLD,30));
+
+            setBackground(Color.darkGray);
 
 
+            add(updatePanel, BorderLayout.CENTER);
+            add(n1, BorderLayout.NORTH);
+            add(n2, BorderLayout.WEST);
+            add(n3, BorderLayout.EAST);
+            add(n4,BorderLayout.SOUTH);
+        }
 
-class AddProduct extends JPanel {
-    public AddProduct()
-    {
-        setLayout(new BorderLayout());
+        void addProduct () {
+            Product last;
+            if (products.size() > 0) {
+                last = products.get(products.size() - 1);
+            }
 
-        JPanel updatePanel = new JPanel();
-        updatePanel.setLayout(new GridLayout(6,1, 0, 0));
-
-        JLabel name = new JLabel("Name");
-        name.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-        JTextField namef = new JTextField();
-
-        JLabel description = new JLabel("Description");
-        description.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-        JTextField descriptionf = new JTextField();
-
-        JLabel quantity = new JLabel("Quantity");
-        quantity.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-        JTextField quantityf = new JTextField(20);
-
-        JLabel price = new JLabel("Price");
-        price.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-        JTextField pricef = new JTextField(20);
-
-        JLabel CategoryLabel = new JLabel("Category");
-        CategoryLabel.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-
-        String[] s1={"Technology","Grocery","Crockery","Clothing" , "Perfumes"};
-        JComboBox j1=new JComboBox(s1);
-
-        JButton add = new JButton();
-        add.setText("Add");
-        add.setBackground(Color.darkGray);
-        add.setForeground(Color.white);
-
-        JButton Cancel = new JButton();
-        Cancel.setText("Cancel");
-        Cancel.setBackground(Color.darkGray);
-        Cancel.setForeground(Color.white);
-
-        JPanel nameGroup = new JPanel();
-        nameGroup.setLayout(new GridLayout(1, 2));
-        nameGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        nameGroup.add(name);
-        nameGroup.add(namef);
-
-        JPanel descGroup = new JPanel();
-        descGroup.setLayout(new GridLayout(1, 2));
-        descGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        descGroup.add(description);
-        descGroup.add(descriptionf);
-
-        JPanel priceGroup = new JPanel();
-        priceGroup.setLayout(new GridLayout(1, 2));
-        priceGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        priceGroup.add(price);
-        priceGroup.add(pricef);
-
-        JPanel quanGroup = new JPanel();
-        quanGroup.setLayout(new GridLayout(1, 2));
-        quanGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        quanGroup.add(quantity);
-        quanGroup.add(quantityf);
-
-        JPanel catGroup = new JPanel();
-        catGroup.setLayout(new GridLayout(1, 2));
-        catGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        catGroup.add(CategoryLabel);
-        catGroup.add(j1);
-
-        JPanel buttGroup = new JPanel();
-        buttGroup.setLayout(new GridLayout(1, 2));
-        buttGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        buttGroup.add(add);
-        buttGroup.add(Cancel);
-
-        updatePanel.add(nameGroup);
-        updatePanel.add(descGroup);
-        updatePanel.add(priceGroup);
-        updatePanel.add(quanGroup);
-        updatePanel.add(catGroup);
-        updatePanel.add(buttGroup);
-
-        JLabel n1 = new JLabel("a");
-        n1.setForeground(Color.darkGray);
-        n1.setFont(new Font("Arial", Font.BOLD,30));
-
-        JLabel n2 = new JLabel("a");
-        n2.setForeground(Color.darkGray);
-        n2.setFont(new Font("Arial", Font.BOLD,80));
-
-        JLabel n3 = new JLabel("a");
-        n3.setForeground(Color.darkGray);
-        n3.setFont(new Font("Arial", Font.BOLD,80));
-
-        JLabel n4 = new JLabel("a");
-        n4.setForeground(Color.darkGray);
-        n4.setFont(new Font("Arial", Font.BOLD,30));
-
-        setBackground(Color.darkGray);
+            int id;
 
 
-        add(updatePanel, BorderLayout.CENTER);
-        add(n1, BorderLayout.NORTH);
-        add(n2, BorderLayout.WEST);
-        add(n3, BorderLayout.EAST);
-        add(n4,BorderLayout.SOUTH);
+//            Product new_prod = new Product();
+        }
     }
-}
 
 
-class UpdateProduct extends JPanel {
-    UpdateProduct() {
-        setLayout(new BorderLayout());
+    class UpdateProduct extends JPanel {
+        UpdateProduct() {
+            setLayout(new BorderLayout());
 
-        JPanel updatePanel = new JPanel();
-        updatePanel.setLayout(new GridLayout(6,1, 0, 0));
+            JPanel updatePanel = new JPanel();
+            updatePanel.setLayout(new GridLayout(6,1, 0, 0));
 
-        JLabel name = new JLabel("Name");
-        name.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-        JTextField namef = new JTextField();
+            JLabel name = new JLabel("Name");
+            name.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            JTextField namef = new JTextField();
 
-        JLabel description = new JLabel("Description");
-        description.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-        JTextField descriptionf = new JTextField();
+            JLabel description = new JLabel("Description");
+            description.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            JTextField descriptionf = new JTextField();
 
-        JLabel quantity = new JLabel("Quantity");
-        quantity.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-        JTextField quantityf = new JTextField(20);
+            JLabel quantity = new JLabel("Quantity");
+            quantity.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            JTextField quantityf = new JTextField(20);
 
-        JLabel price = new JLabel("Price");
-        price.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
-        JTextField pricef = new JTextField(20);
+            JLabel price = new JLabel("Price");
+            price.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            JTextField pricef = new JTextField(20);
 
-        JLabel CategoryLabel = new JLabel("Category");
-        CategoryLabel.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            JLabel CategoryLabel = new JLabel("Category");
+            CategoryLabel.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
 
-        String[] s1={"Technology","Grocery","Crockery","Clothing" , "Perfumes"};
-        JComboBox j1=new JComboBox(s1);
+            String[] s1={"Technology","Grocery","Crockery","Clothing" , "Perfumes"};
+            JComboBox j1=new JComboBox(s1);
 
-        JButton edit = new JButton();
-        edit.setText("Update");
-        edit.setBackground(Color.darkGray);
-        edit.setForeground(Color.white);
+            JButton edit = new JButton();
+            edit.setText("Update");
+            edit.setBackground(Color.darkGray);
+            edit.setForeground(Color.white);
 
-        JButton Cancel = new JButton();
-        Cancel.setText("Cancel");
-        Cancel.setBackground(Color.darkGray);
-        Cancel.setForeground(Color.white);
+            JButton Cancel = new JButton();
+            Cancel.setText("Cancel");
+            Cancel.setBackground(Color.darkGray);
+            Cancel.setForeground(Color.white);
 
-        JPanel nameGroup = new JPanel();
-        nameGroup.setLayout(new GridLayout(1, 2));
-        nameGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        nameGroup.add(name);
-        nameGroup.add(namef);
+            JPanel nameGroup = new JPanel();
+            nameGroup.setLayout(new GridLayout(1, 2));
+            nameGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            nameGroup.add(name);
+            nameGroup.add(namef);
 
-        JPanel descGroup = new JPanel();
-        descGroup.setLayout(new GridLayout(1, 2));
-        descGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        descGroup.add(description);
-        descGroup.add(descriptionf);
+            JPanel descGroup = new JPanel();
+            descGroup.setLayout(new GridLayout(1, 2));
+            descGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            descGroup.add(description);
+            descGroup.add(descriptionf);
 
-        JPanel priceGroup = new JPanel();
-        priceGroup.setLayout(new GridLayout(1, 2));
-        priceGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        priceGroup.add(price);
-        priceGroup.add(pricef);
+            JPanel priceGroup = new JPanel();
+            priceGroup.setLayout(new GridLayout(1, 2));
+            priceGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            priceGroup.add(price);
+            priceGroup.add(pricef);
 
-        JPanel quanGroup = new JPanel();
-        quanGroup.setLayout(new GridLayout(1, 2));
-        quanGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        quanGroup.add(quantity);
-        quanGroup.add(quantityf);
+            JPanel quanGroup = new JPanel();
+            quanGroup.setLayout(new GridLayout(1, 2));
+            quanGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            quanGroup.add(quantity);
+            quanGroup.add(quantityf);
 
-        JPanel catGroup = new JPanel();
-        catGroup.setLayout(new GridLayout(1, 2));
-        catGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        catGroup.add(CategoryLabel);
-        catGroup.add(j1);
+            JPanel catGroup = new JPanel();
+            catGroup.setLayout(new GridLayout(1, 2));
+            catGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            catGroup.add(CategoryLabel);
+            catGroup.add(j1);
 
-        JPanel buttGroup = new JPanel();
-        buttGroup.setLayout(new GridLayout(1, 2));
-        buttGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
-        buttGroup.add(edit);
-        buttGroup.add(Cancel);
+            JPanel buttGroup = new JPanel();
+            buttGroup.setLayout(new GridLayout(1, 2));
+            buttGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            buttGroup.add(edit);
+            buttGroup.add(Cancel);
 
-        updatePanel.add(nameGroup);
-        updatePanel.add(descGroup);
-        updatePanel.add(priceGroup);
-        updatePanel.add(quanGroup);
-        updatePanel.add(catGroup);
-        updatePanel.add(buttGroup);
+            updatePanel.add(nameGroup);
+            updatePanel.add(descGroup);
+            updatePanel.add(priceGroup);
+            updatePanel.add(quanGroup);
+            updatePanel.add(catGroup);
+            updatePanel.add(buttGroup);
 
-        JLabel n1 = new JLabel("a");
-        n1.setForeground(Color.darkGray);
-        n1.setFont(new Font("Arial", Font.BOLD,30));
+            JLabel n1 = new JLabel("a");
+            n1.setForeground(Color.darkGray);
+            n1.setFont(new Font("Arial", Font.BOLD,30));
 
-        JLabel n2 = new JLabel("a");
-        n2.setForeground(Color.darkGray);
-        n2.setFont(new Font("Arial", Font.BOLD,80));
+            JLabel n2 = new JLabel("a");
+            n2.setForeground(Color.darkGray);
+            n2.setFont(new Font("Arial", Font.BOLD,80));
 
-        JLabel n3 = new JLabel("a");
-        n3.setForeground(Color.darkGray);
-        n3.setFont(new Font("Arial", Font.BOLD,80));
+            JLabel n3 = new JLabel("a");
+            n3.setForeground(Color.darkGray);
+            n3.setFont(new Font("Arial", Font.BOLD,80));
 
-        JLabel n4 = new JLabel("a");
-        n4.setForeground(Color.darkGray);
-        n4.setFont(new Font("Arial", Font.BOLD,30));
+            JLabel n4 = new JLabel("a");
+            n4.setForeground(Color.darkGray);
+            n4.setFont(new Font("Arial", Font.BOLD,30));
 
-        setBackground(Color.darkGray);
+            setBackground(Color.darkGray);
 
 
-        add(updatePanel, BorderLayout.CENTER);
-        add(n1, BorderLayout.NORTH);
-        add(n2, BorderLayout.WEST);
-        add(n3, BorderLayout.EAST);
-        add(n4,BorderLayout.SOUTH);
+            add(updatePanel, BorderLayout.CENTER);
+            add(n1, BorderLayout.NORTH);
+            add(n2, BorderLayout.WEST);
+            add(n3, BorderLayout.EAST);
+            add(n4,BorderLayout.SOUTH);
+        }
     }
+
 }
 
 
