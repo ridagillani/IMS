@@ -9,7 +9,6 @@ public class Dashboard extends JFrame
 {
     JPanel dashPanel = new MainDash();
     JPanel productPanel = new Product();
-    JPanel inventoryPanel = new Inventory();
     JPanel orderPanel = new Orders();
 
     JButton dashboard = new JButton();
@@ -61,6 +60,12 @@ public class Dashboard extends JFrame
             dispose();
             new NewPage();
         });
+
+
+
+
+
+        JButton dashboard = new JButton();
 
         dashboard.setText("Dashboard");
         dashboard.setForeground(Color.darkGray);
@@ -126,36 +131,6 @@ public class Dashboard extends JFrame
                 repaint();
             }
 
-            else if (e.getActionCommand().equalsIgnoreCase("Check Stock"))
-            {
-                if (current == "dash")
-                {
-                    remove(dashPanel);
-                    dashboard.setBackground(Color.white);
-                    dashboard.setForeground(Color.black);
-                }
-
-                else if (current == "manage")
-                {
-                    remove(productPanel);
-                    manage.setBackground(Color.white);
-                    manage.setForeground(Color.black);
-                }
-
-                else if (current == "orders")
-                {
-                    remove(orderPanel);
-                    orders.setBackground(Color.white);
-                    orders.setForeground(Color.black);
-                }
-
-                add(inventoryPanel, BorderLayout.CENTER);
-                orders.setBackground(Color.gray);
-                orders.setForeground(Color.WHITE);
-                current = "stock";
-                revalidate();
-                repaint();
-            }
 
             else if (e.getActionCommand().equalsIgnoreCase("Check Orders"))
             {

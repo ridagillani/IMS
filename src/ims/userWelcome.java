@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class userWelcome extends JPanel {
     public userWelcome() {
+        String current = "dash";
         setBackground(Color.white);
         setLayout(new GridBagLayout());
 

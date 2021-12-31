@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 
 public class User extends JFrame {
     JPanel userPanel = new userWelcome();
-    JPanel seePanel = new showProd();
+    JPanel seePanel = new PurchaseNow();
 
-    JPanel cartPanel = new carbutton();
+    JPanel cartPanel = new checkCart();
 
 
     String current = "welcome";
@@ -39,13 +39,13 @@ public class User extends JFrame {
         manage.setSize(125,60);
         manage.setForeground(Color.darkGray);
         manage.setBackground(Color.white);
+        manage.setFocusable(false);
 
         JButton logout = new JButton();
         logout.setText("Exit");
         logout.setForeground(Color.darkGray);
         logout.setBackground(Color.white);
         logout.addActionListener(e -> {
-            dispose();
             new NewPage();
         });
 
@@ -55,15 +55,16 @@ public class User extends JFrame {
         orders.setText("Check Cart");
         orders.setForeground(Color.darkGray);
         orders.setBackground(Color.white);
+        orders.setFocusable(false);
 
 
         JButton dashboard = new JButton();
         dashboard.setText("Dashboard");
         dashboard.setForeground(Color.darkGray);
         dashboard.setBackground(Color.white);
+        dashboard.setFocusable(false);
 
         manage.addActionListener(new User.UserAction());
-
         orders.addActionListener(new User.UserAction());
         dashboard.addActionListener(new User.UserAction());
 
@@ -91,7 +92,9 @@ public class User extends JFrame {
     class UserAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (e.getActionCommand().equalsIgnoreCase("See Products")) {
+
+             if (e.getActionCommand().equalsIgnoreCase("Purchase Now"))
+            {
                 if (current == "welcome")
                 {
                     remove(userPanel);
@@ -99,7 +102,7 @@ public class User extends JFrame {
 
                 else if (current == "see")
                 {
-                    remove(seePanel);
+                   remove(seePanel);
                 }
 
 
@@ -110,30 +113,6 @@ public class User extends JFrame {
 
                 add(seePanel, BorderLayout.CENTER);
                 current = "see";
-                revalidate();
-                repaint();
-            }
-
-            else if (e.getActionCommand().equalsIgnoreCase("Purchase Now"))
-            {
-                if (current == "welcome")
-                {
-                    remove(userPanel);
-                }
-
-                else if (current == "see")
-                {
-                    remove(seePanel);
-                }
-
-
-                else if (current == "cart")
-                {
-                    remove(cartPanel);
-                }
-
-                add(cartPanel, BorderLayout.CENTER);
-                current = "cart";
                 revalidate();
                 repaint();
 
@@ -156,7 +135,7 @@ public class User extends JFrame {
 
                 else if (current == "cart")
                 {
-                    remove(cartPanel);
+                   remove(cartPanel);
                 }
 
                 add(cartPanel, BorderLayout.CENTER);
@@ -180,7 +159,7 @@ public class User extends JFrame {
 
                 else if (current == "cart")
                 {
-                    remove(cartPanel);
+                   remove(cartPanel);
                 }
 
                 add(userPanel, BorderLayout.CENTER);

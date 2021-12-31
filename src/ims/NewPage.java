@@ -27,14 +27,14 @@ class NewPage extends JFrame
 
         JLabel label = new JLabel();
         label.setText("Inventory Management System");
-        label.setBounds(330, 169, 700, 60);
+        label.setBounds(390, 130, 1400, 120);
         label.setForeground(Color.WHITE);
         label.setFont(new Font("Cinzel", Font.BOLD, 30));
         panel.add(label);
 
         JButton user = new JButton();
         user.setText("User");
-        user.setBounds(530,369,125,60);
+        user.setBounds(550,350,125,60);
         user.setBackground(Color.WHITE);
         user.setForeground(Color.darkGray);
         user.setFont(new Font("Cinzel", Font.BOLD, 15));
@@ -46,19 +46,34 @@ class NewPage extends JFrame
 
         JButton admin = new JButton();
         admin.setText("Admin");
-        admin.setBounds(530,246,125,60);
+        admin.setBounds(550,250,125,60);
         admin.setBackground(Color.WHITE);
         admin.setForeground(Color.darkGray);
         admin.setFont(new Font("Cinzel", Font.BOLD, 15));
         admin.setFocusable(false);
 
+        JButton exit = new JButton();
+        exit.setText("EXIT");
+        exit.setBounds(1100,600,125,60);
+        exit.setBackground(Color.WHITE);
+        exit.setForeground(Color.darkGray);
+        exit.setFont(new Font("Cinzel", Font.BOLD, 15));
+        exit.setFocusable(false);
+        exit.addActionListener(e -> {
+            System.exit(0);
+        });
+
+
         panel.add(admin);
         buttons.add(admin);
+        panel.add(exit);
+
         admin.addActionListener(new Action());
 
         add(panel);
 
     }
+
 
     class Action implements ActionListener {
         @Override
@@ -73,6 +88,7 @@ class NewPage extends JFrame
                 new Admin();
                 dispose();
             }
+
         }
     }
 }
