@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ProductScreen extends JPanel {
     JPanel productPanel = new ProductList();
@@ -11,6 +12,9 @@ public class ProductScreen extends JPanel {
     JPanel updateProductPanel = new UpdateProduct();
 
     String current = "view";
+
+    ArrayList<Product> products = new ArrayList<>();
+    fileHandling file = new fileHandling();
 
     public ProductScreen() {
         setBackground(Color.white);
