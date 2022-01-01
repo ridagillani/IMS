@@ -64,6 +64,7 @@ public class ProductScreen extends JPanel {
         view.addActionListener(new ProductAction());
         New.addActionListener(new ProductAction());
         update.addActionListener(new ProductAction());
+        remove.addActionListener(e -> removePopup());
 
         buttons.add(view);
         buttons.add(New);
@@ -81,7 +82,30 @@ public class ProductScreen extends JPanel {
 
     }
 
+    void removePopup () {
+        JFrame f = new JFrame("Product Remove");
+        f.setBounds(300,300, 400,130);
+        f.setLayout(new GridLayout(2,1));
+        JLabel l = new JLabel("Do you want to remove the product? ");
+
+        JButton b = new JButton("Yes");
+        JButton b2 = new JButton("No");
+
+        b.addActionListener(e -> {
+            removeProduct();
+            f.dispose();
+        });
+        b2.addActionListener(e -> {f.dispose();});
+
+        f.add(l);
+        f.add(b);
+        f.add(b2);
+        f.show();
+
+    }
+
     void removeProduct () {
+
         for (int i = 0; i < products.size(); i++) {
             if (products.get(i).getPId() == selectedRow) {
                 products.remove(i);
@@ -89,6 +113,22 @@ public class ProductScreen extends JPanel {
         }
 
         products = fileM.writeProducts(products);
+
+
+        if (current == "view") {
+            remove(productPanel);
+        } else if (current == "add") {
+            remove(addProductPanel);
+        } else if (current == "update") {
+            remove(updateProductPanel);
+        }
+
+        productPanel = new ProductList();
+
+        add(productPanel, BorderLayout.CENTER);
+        current = "view";
+        revalidate();
+        repaint();
     }
 
 
