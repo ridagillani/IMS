@@ -1,6 +1,7 @@
 package ims;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,10 +14,10 @@ class OrderScreen extends JPanel
         setLayout(new BorderLayout());
 
         String[] column_name = {
-                "Product ID",
-                "Product Name",
-                "Stock Quantity",
-                "Price"
+                "Order ID",
+                "Order Number",
+                "Quantity",
+                "Amount"
         };
 
         String[][] data = {
@@ -40,6 +41,7 @@ class OrderScreen extends JPanel
         ordertable.setRowHeight(35);
 
         JPanel tableP = new JPanel();
+        tableP.setBorder(BorderFactory.createLineBorder(Color.darkGray,35));
         tableP.setLayout(new BorderLayout(0,0));
         tableP.add(ordertable.getTableHeader(), BorderLayout.NORTH);
         tableP.add(ordertable, BorderLayout.CENTER);
