@@ -27,7 +27,7 @@ public class fileHandling {
 
                 String[] inputArray = input.split(",");
 
-                Product pr = new Product(Integer.parseInt(inputArray[0].replaceAll("\\s", "")), inputArray[1], inputArray[2], Integer.parseInt(inputArray[3].replaceAll("\\s", "")), inputArray[4], Double.parseDouble(inputArray[5].replaceAll("\\s", "")));
+                Product pr = new Product(Integer.parseInt(inputArray[0].replaceAll("\\s", "")), inputArray[1], inputArray[2], Integer.parseInt(inputArray[3].replaceAll("\\s", "")), inputArray[4], Double.parseDouble(inputArray[5].replaceAll("\\s", "")), Double.parseDouble(inputArray[6].replaceAll("\\s", "")));
 
                 products.add(pr);
                 }
@@ -49,7 +49,7 @@ public class fileHandling {
 
             for (int i=0; i < prod.size(); i++)
             {
-                bw.write(prod.get(i).getPId() + "," + prod.get(i).getPname() + "," + prod.get(i).getDescription() + "," + prod.get(i).getPQuantity() + "," + prod.get(i).getCategory() + "," + prod.get(i).getPrice() + ";");
+                bw.write(prod.get(i).getPId() + "," + prod.get(i).getPname() + "," + prod.get(i).getDescription() + "," + prod.get(i).getPQuantity() + "," + prod.get(i).getCategory() + "," + prod.get(i).getPrice() + "," + prod.get(i).getCost() + ";");
                 bw.newLine();
             }
 

@@ -1,12 +1,21 @@
 package ims;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class User extends JFrame {
-    JPanel userPanel = new userWelcome();
+    ArrayList<Product> products = new ArrayList<>();
+    fileHandling fileM = new fileHandling();
+
+    int selectedRow;
+    ArrayList<CartProduct> cart = new ArrayList<>();
+
+    JPanel userPanel = new PurchaseNow();
     JPanel seePanel = new PurchaseNow();
 
     JPanel cartPanel = new checkCart();
@@ -34,12 +43,12 @@ public class User extends JFrame {
         heading.setBackground(Color.darkGray);
         heading.setFont(new Font("Cinzel", Font.BOLD, 30));
 
-        JButton manage = new JButton();
-        manage.setText("Purchase Now");
-        manage.setSize(125,60);
-        manage.setForeground(Color.darkGray);
-        manage.setBackground(Color.white);
-        manage.setFocusable(false);
+//        JButton manage = new JButton();
+//        manage.setText("Purchase Now");
+//        manage.setSize(125,60);
+//        manage.setForeground(Color.darkGray);
+//        manage.setBackground(Color.white);
+//        manage.setFocusable(false);
 
         JButton logout = new JButton();
         logout.setText("Exit");
@@ -65,7 +74,7 @@ public class User extends JFrame {
         dashboard.setBackground(Color.white);
         dashboard.setFocusable(false);
 
-        manage.addActionListener(new User.UserAction());
+//        manage.addActionListener(new User.UserAction());
         orders.addActionListener(new User.UserAction());
         dashboard.addActionListener(new User.UserAction());
 
@@ -77,7 +86,7 @@ public class User extends JFrame {
         Container navigation = new Container();
         navigation.setLayout(new GridBagLayout());
         navigation.add(dashboard);
-        navigation.add(manage);
+//        navigation.add(manage);
 
         navigation.add(orders);
         navigation.add(logout);
@@ -139,6 +148,7 @@ public class User extends JFrame {
                    remove(cartPanel);
                 }
 
+                cartPanel = new checkCart();
                 add(cartPanel, BorderLayout.CENTER);
                 current = "cart";
                 revalidate();
@@ -168,6 +178,196 @@ public class User extends JFrame {
                 revalidate();
                 repaint();
             }
+        }
+    }
+
+
+    public class checkCart extends JPanel {
+
+        JTable cartable;
+        checkCart()
+        {
+            JPanel p2 = new JPanel();
+            setBackground(Color.white);
+            setLayout(new BorderLayout());
+
+
+
+            String[] column_name = {
+                    "Product ID",
+                    "Product Name",
+                    "Product Quantity",
+                    "Total Price"
+            };
+
+            String[][] data = new String[cart.size()][4];
+
+
+            for (int i=0; i < cart.size(); i++) {
+                String[] n = {Integer.toString(cart.get(i).getId()), cart.get(i).getName(), Integer.toString(cart.get(i).getQuantity()), Double.toString(cart.get(i).getTotalPrice())};
+                data[i] = n;
+
+            }
+
+
+            cartable = new JTable(data, column_name);
+
+            cartable.setAutoCreateRowSorter(true);
+
+
+            JPanel viewPanel = new JPanel();
+            viewPanel.setLayout(new BorderLayout());
+
+            viewPanel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY,35));
+
+            cartable.setRowHeight(35);
+            viewPanel.add(cartable.getTableHeader(), BorderLayout.NORTH);
+            viewPanel.add(cartable, BorderLayout.CENTER);
+
+
+            JButton checkout = new JButton();
+            checkout.setText("Confirm Order");
+            checkout.setSize(125,60);
+            checkout.setForeground(Color.darkGray);
+            checkout.setBackground(Color.white);
+
+
+            p2.add(checkout);
+            add(p2, BorderLayout.SOUTH);
+            add(viewPanel, BorderLayout.CENTER);
+
+
+        }
+    }
+
+
+
+    class PurchaseNow extends JPanel
+    {
+
+        Product selected;
+        JTable productable;
+
+        PurchaseNow()
+        {
+            JPanel p1 = new JPanel();
+            setBackground(Color.white);
+            setLayout(new BorderLayout());
+
+
+            products = fileM.readProduct();
+
+
+            String[] column_name = {
+                    "Product ID",
+                    "Product Name",
+                    "Product Description",
+                    "Product Category",
+                    "Product Price"
+            };
+
+            String[][] data = new String[products.size()][6];
+
+
+            for (int i=0; i < products.size(); i++) {
+                String[] n = {Integer.toString(products.get(i).getPId()), products.get(i).getPname(), products.get(i).getDescription(), products.get(i).getCategory(), Double.toString(products.get(i).getPrice())};
+                data[i] = n;
+
+            }
+
+
+            productable = new JTable(data, column_name) {
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
+
+            productable.setAutoCreateRowSorter(true);
+            productable.setSelectionBackground(Color.LIGHT_GRAY);
+            productable.setRowSelectionAllowed(true);
+            productable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+                public void valueChanged(ListSelectionEvent event) {
+                    if (!event.getValueIsAdjusting()) {
+                        selectedRow = Integer.parseInt(productable.getValueAt(productable.getSelectedRow(), 0).toString());
+                    }
+                }
+            });
+
+
+            JPanel viewPanel = new JPanel();
+            viewPanel.setLayout(new BorderLayout());
+
+            viewPanel.setBorder(BorderFactory.createLineBorder(Color.DARK_GRAY,35));
+
+            productable.setRowHeight(35);
+            viewPanel.add(productable.getTableHeader(), BorderLayout.NORTH);
+            viewPanel.add(productable, BorderLayout.CENTER);
+
+
+            JButton ac = new JButton();
+            ac.setText("Add to Cart");
+            ac.setSize(125,60);
+            ac.setForeground(Color.darkGray);
+            ac.setBackground(Color.white);
+            ac.addActionListener(e -> addToCart());
+
+
+            p1.add(ac);
+            add(p1, BorderLayout.SOUTH);
+            add(viewPanel, BorderLayout.CENTER);
+
+
+        }
+
+        void getProduct () {
+            for (int i = 0; i < products.size(); i++) {
+                if (products.get(i).getPId() == selectedRow) {
+                    selected = products.get(i);
+                    break;
+                }
+            }
+        }
+
+        boolean inCart () {
+            for (int i = 0; i < cart.size(); i++) {
+                if (cart.get(i).getId() == selected.getPId()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        void addToCart () {
+            JFrame f = new JFrame("Product Added to Cart");
+            f.setBounds(300,300, 400,100);
+            f.setLayout(new GridBagLayout());
+            JLabel l = new JLabel("Done");
+
+
+            f.add(l);
+            f.show();
+
+            getProduct();
+
+            if (inCart()) {
+                for (int i = 0; i < cart.size(); i++) {
+                    if (cart.get(i).getId() == selected.getPId()) {
+                        cart.get(i).addOne(selected.getPrice(), selected.getCost());
+                        break;
+                    }
+                }
+            } else {
+                CartProduct n = new CartProduct(selected.getPId(), selected.getPname(), 1, selected.getPrice(), selected.getCost());
+                cart.add(n);
+            }
+
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+
+            f.dispose();
         }
     }
 }
