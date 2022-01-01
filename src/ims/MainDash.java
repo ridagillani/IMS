@@ -2,10 +2,23 @@ package ims;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class MainDash extends JPanel {
+    fileHandling fileM = new fileHandling();
+
+    ArrayList<Product> products = fileM.readProduct();
+    ArrayList<Order> orders = fileM.readOrders();
+
+    int available = 0;
+    int sold = 0;
+    double revenue = 0.0;
+    double profitA = 0.0;
+
+
     public MainDash ()
     {
+        calculate();
         setBackground(Color.white);
         setLayout(new BorderLayout());
 
@@ -13,11 +26,11 @@ public class MainDash extends JPanel {
         dashBox.setLayout(new GridLayout(2,2,10,10));
 
         JLabel stockLabel = new JLabel();
-        stockLabel.setText("Total Stock: ");
+        stockLabel.setText("Available Stock: ");
         stockLabel.setFont(new Font("Gilroy", Font.BOLD,20));
 
         JLabel stockAmount = new JLabel();
-        stockAmount.setText("125");
+        stockAmount.setText(Integer.toString(available));
         stockAmount.setFont(new Font("Gilroy", Font.BOLD,80));
 
         JPanel stock = new JPanel();
@@ -31,7 +44,7 @@ public class MainDash extends JPanel {
         soldLabel.setFont(new Font("Gilroy", Font.BOLD,20));
 
         JLabel soldAmount = new JLabel();
-        soldAmount.setText("50");
+        soldAmount.setText(Integer.toString(sold));
         soldAmount.setFont(new Font("Gilroy", Font.BOLD,80));
 
         JPanel sold = new JPanel();
@@ -41,11 +54,11 @@ public class MainDash extends JPanel {
         sold.add(soldAmount);
 
         JLabel totalProfitLabel = new JLabel();
-        totalProfitLabel.setText("Profit: ");
+        totalProfitLabel.setText("Revenue: ");
         totalProfitLabel.setFont(new Font("Gilroy", Font.BOLD,20));
 
         JLabel profitAmount = new JLabel();
-        profitAmount.setText("50");
+        profitAmount.setText(Double.toString(revenue));
         profitAmount.setFont(new Font("Gilroy", Font.BOLD,80));
 
         JPanel profit = new JPanel();
@@ -55,11 +68,11 @@ public class MainDash extends JPanel {
         profit.add(profitAmount);
 
         JLabel lossLabel = new JLabel();
-        lossLabel.setText("Loss: ");
+        lossLabel.setText("Profit: ");
         lossLabel.setFont(new Font("Gilroy", Font.BOLD,20));
 
         JLabel  lossAmount = new JLabel();
-        lossAmount.setText("50");
+        lossAmount.setText(Double.toString(profitA));
         lossAmount.setFont(new Font("Gilroy", Font.BOLD,80));
 
         JPanel loss = new JPanel();
@@ -76,6 +89,23 @@ public class MainDash extends JPanel {
 
         add(dashBox , BorderLayout.CENTER);
 
+    }
+
+    void calculate () {
+        for (int i = 0; i < products.size(); i++) {
+            available = available + products.get(i).getPQuantity();
+        }
+        double cost = 0;
+
+        for (int j = 0; j < orders.size(); j++) {
+            sold = sold + orders.get(j).getQuantity();
+            revenue = revenue + orders.get(j).getAmount();
+            cost = cost + orders.get(j).getCost();
+
+            profitA = revenue - cost;
+        }
+
+        System.out.println(cost);
     }
 
 }

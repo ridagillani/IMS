@@ -77,7 +77,7 @@ public class fileHandling {
 
                     String[] inputArray = input.split(",");
 
-                    Order order = new Order(Integer.parseInt(inputArray[0].replaceAll("\\s", "")), Integer.parseInt(inputArray[1].replaceAll("\\s", "")), Integer.parseInt(inputArray[2].replaceAll("\\s", "")), Double.parseDouble(inputArray[3].replaceAll("\\s", "")));
+                    Order order = new Order(Integer.parseInt(inputArray[0].replaceAll("\\s", "")), Integer.parseInt(inputArray[1].replaceAll("\\s", "")), Integer.parseInt(inputArray[2].replaceAll("\\s", "")), Double.parseDouble(inputArray[3].replaceAll("\\s", "")), Double.parseDouble(inputArray[4].replaceAll("\\s", "")));
 
                     orders.add(order);
                 }
@@ -99,7 +99,7 @@ public class fileHandling {
 
             for (int i=0; i < orders.size(); i++)
             {
-                bw.write(orders.get(i).getOrder() + "," + orders.get(i).getPID() + "," + orders.get(i).getQuantity() + "," + orders.get(i).getAmount() + ";");
+                bw.write(orders.get(i).getOrder() + "," + orders.get(i).getPID() + "," + orders.get(i).getQuantity() + "," + orders.get(i).getAmount() + "," + orders.get(i).getCost() + ";");
                 bw.newLine();
             }
 

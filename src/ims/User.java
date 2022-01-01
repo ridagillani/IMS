@@ -10,6 +10,8 @@ import java.util.ArrayList;
 
 public class User extends JFrame {
     ArrayList<Product> products = new ArrayList<>();
+    ArrayList<Order> orders = new ArrayList<>();
+
     fileHandling fileM = new fileHandling();
 
     int selectedRow;
@@ -97,6 +99,65 @@ public class User extends JFrame {
         add(header, BorderLayout.NORTH);
         add(userPanel, BorderLayout.CENTER);
 
+    }
+
+
+    void placeOrder () {
+
+        JFrame f = new JFrame("Order Placed");
+        f.setBounds(300,300, 400,100);
+        f.setLayout(new GridBagLayout());
+        JLabel l = new JLabel("Done");
+
+
+        f.add(l);
+        f.show();
+
+        Order last;
+        int id = 0;
+        if (orders.size() > 0) {
+            last = orders.get(orders.size() - 1);
+            id = last.getOrder() + 1;
+        }
+
+        for (int i = 0; i < cart.size(); i++) {
+            Order n = new Order(id, cart.get(i).getId(), cart.get(i).getQuantity(), cart.get(i).getTotalPrice(), cart.get(i).getTotalCost());
+            orders.add(n);
+
+        }
+        orders = fileM.writeOrders(orders);
+
+        cart = new ArrayList<>();
+
+        if (current == "welcome")
+        {
+            remove(userPanel);
+        }
+
+        else if (current == "see")
+        {
+            remove(seePanel);
+        }
+
+
+        else if (current == "cart")
+        {
+            remove(cartPanel);
+        }
+
+        cartPanel = new checkCart();
+        add(cartPanel, BorderLayout.CENTER);
+        current = "cart";
+        revalidate();
+        repaint();
+
+        try {
+            Thread.sleep(500);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
+        f.dispose();
     }
 
     class UserAction implements ActionListener {
@@ -230,6 +291,7 @@ public class User extends JFrame {
             checkout.setSize(125,60);
             checkout.setForeground(Color.darkGray);
             checkout.setBackground(Color.white);
+            checkout.addActionListener(e -> placeOrder());
 
 
             p2.add(checkout);
@@ -238,6 +300,7 @@ public class User extends JFrame {
 
 
         }
+
     }
 
 
@@ -256,6 +319,7 @@ public class User extends JFrame {
 
 
             products = fileM.readProduct();
+            orders = fileM.readOrders();
 
 
             String[] column_name = {
