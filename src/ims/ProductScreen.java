@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ProductScreen extends JPanel {
 
-    public ArrayList<Product> products = new ArrayList<Product>();
+    ArrayList<Product> products = new ArrayList<Product>();
     fileHandling fileM = new fileHandling();
 
     int selectedRow;
@@ -203,14 +203,15 @@ public class ProductScreen extends JPanel {
                     "Product Description",
                     "Stock Quantity",
                     "Product Category",
-                    "Product Price"
+                    "Product Price",
+                    "Product Cost"
             };
 
             String[][] data = new String[products.size()][6];
 
 
             for (int i=0; i < products.size(); i++) {
-                String[] n = {Integer.toString(products.get(i).getPId()), products.get(i).getPname(), products.get(i).getDescription(), Integer.toString(products.get(i).getPQuantity()), products.get(i).getCategory(), Double.toString(products.get(i).getPrice())};
+                String[] n = {Integer.toString(products.get(i).getPId()), products.get(i).getPname(), products.get(i).getDescription(), Integer.toString(products.get(i).getPQuantity()), products.get(i).getCategory(), Double.toString(products.get(i).getPrice()), Double.toString(products.get(i).getCost())};
                 data[i] = n;
 
             }
@@ -272,6 +273,7 @@ public class ProductScreen extends JPanel {
         JTextField descriptionf = new JTextField();
         JTextField quantityf = new JTextField(20);
         JTextField pricef = new JTextField(20);
+        JTextField costf = new JTextField(20);
         JComboBox j1;
 
         public AddProduct()
@@ -279,7 +281,7 @@ public class ProductScreen extends JPanel {
             setLayout(new BorderLayout());
 
             JPanel updatePanel = new JPanel();
-            updatePanel.setLayout(new GridLayout(6,1, 0, 0));
+            updatePanel.setLayout(new GridLayout(7,1, 0, 0));
 
             JLabel name = new JLabel("Name");
             name.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
@@ -295,6 +297,11 @@ public class ProductScreen extends JPanel {
             price.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
 
 
+            JLabel cost = new JLabel("Cost");
+            price.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+
+
+
             JLabel CategoryLabel = new JLabel("Category");
             CategoryLabel.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
 
@@ -307,7 +314,7 @@ public class ProductScreen extends JPanel {
             add.setText("Add");
             add.setBackground(Color.darkGray);
             add.setForeground(Color.white);
-            add.addActionListener(e -> addProduct(namef.getText(), descriptionf.getText(), quantityf.getText(), pricef.getText(), j1.getSelectedItem().toString()));
+            add.addActionListener(e -> addProduct(namef.getText(), descriptionf.getText(), quantityf.getText(), pricef.getText(), j1.getSelectedItem().toString(), costf.getText()));
 
             JButton Cancel = new JButton();
             Cancel.setText("Cancel");
@@ -332,6 +339,14 @@ public class ProductScreen extends JPanel {
             priceGroup.add(price);
             priceGroup.add(pricef);
 
+
+            JPanel costGroup = new JPanel();
+            costGroup.setLayout(new GridLayout(1, 2));
+            costGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            costGroup.add(cost);
+            costGroup.add(costf);
+
+
             JPanel quanGroup = new JPanel();
             quanGroup.setLayout(new GridLayout(1, 2));
             quanGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
@@ -353,6 +368,7 @@ public class ProductScreen extends JPanel {
             updatePanel.add(nameGroup);
             updatePanel.add(descGroup);
             updatePanel.add(priceGroup);
+            updatePanel.add(costGroup);
             updatePanel.add(quanGroup);
             updatePanel.add(catGroup);
             updatePanel.add(buttGroup);
@@ -383,7 +399,7 @@ public class ProductScreen extends JPanel {
             add(n4,BorderLayout.SOUTH);
         }
 
-        void addProduct (String name, String description, String quantity, String price, String category) {
+        void addProduct (String name, String description, String quantity, String price, String category, String cost) {
             Product last;
             int id = 0;
             if (products.size() > 0) {
@@ -391,7 +407,7 @@ public class ProductScreen extends JPanel {
                 id = last.getPId() + 1;
             }
 
-            Product newProd = new Product(id, name, description, Integer.parseInt(quantity), category, Double.parseDouble(price));
+            Product newProd = new Product(id, name, description, Integer.parseInt(quantity), category, Double.parseDouble(price), Double.parseDouble(cost));
 
             products.add(newProd);
 
@@ -433,7 +449,7 @@ public class ProductScreen extends JPanel {
             setLayout(new BorderLayout());
 
             JPanel updatePanel = new JPanel();
-            updatePanel.setLayout(new GridLayout(6,1, 0, 0));
+            updatePanel.setLayout(new GridLayout(7,1, 0, 0));
 
             JLabel name = new JLabel("Name");
             name.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
@@ -455,6 +471,11 @@ public class ProductScreen extends JPanel {
             JTextField pricef = new JTextField(20);
             pricef.setText(Double.toString(selected.getPrice()));
 
+            JLabel cost = new JLabel("Cost");
+            price.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            JTextField costf = new JTextField(20);
+            costf.setText(Double.toString(selected.getCost()));
+
             JLabel CategoryLabel = new JLabel("Category");
             CategoryLabel.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
 
@@ -466,7 +487,7 @@ public class ProductScreen extends JPanel {
             edit.setText("Update");
             edit.setBackground(Color.darkGray);
             edit.setForeground(Color.white);
-            edit.addActionListener(e -> updateProduct(namef.getText(), descriptionf.getText(), quantityf.getText(), pricef.getText(), j1.getSelectedItem().toString()));
+            edit.addActionListener(e -> updateProduct(namef.getText(), descriptionf.getText(), quantityf.getText(), pricef.getText(), j1.getSelectedItem().toString(), costf.getText()));
 
 
             JButton Cancel = new JButton();
@@ -492,6 +513,12 @@ public class ProductScreen extends JPanel {
             priceGroup.add(price);
             priceGroup.add(pricef);
 
+            JPanel costGroup = new JPanel();
+            costGroup.setLayout(new GridLayout(1, 2));
+            costGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            costGroup.add(cost);
+            costGroup.add(costf);
+
             JPanel quanGroup = new JPanel();
             quanGroup.setLayout(new GridLayout(1, 2));
             quanGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
@@ -513,6 +540,7 @@ public class ProductScreen extends JPanel {
             updatePanel.add(nameGroup);
             updatePanel.add(descGroup);
             updatePanel.add(priceGroup);
+            updatePanel.add(costGroup);
             updatePanel.add(quanGroup);
             updatePanel.add(catGroup);
             updatePanel.add(buttGroup);
@@ -552,12 +580,13 @@ public class ProductScreen extends JPanel {
             }
         }
 
-        void updateProduct (String name, String description, String quantity, String price, String category) {
+        void updateProduct (String name, String description, String quantity, String price, String category, String cost) {
             selected.setPname(name);
             selected.setDescription(description);
             selected.setPQuantity(Integer.parseInt(quantity));
             selected.setPrice(Double.parseDouble(price));
             selected.setCategory(category);
+            selected.setCost(Double.parseDouble(cost));
 
             for (int i = 0; i < products.size(); i++) {
                 if (products.get(i).getPId() == selected.getPId()) {

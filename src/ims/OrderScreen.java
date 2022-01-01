@@ -5,36 +5,39 @@ import java.awt.*;
 
 class OrderScreen extends JPanel
 {
+    ArrayList<Order> orders = new ArrayList<Order>();
+    fileHandling fileM = new fileHandling();
+
+
     OrderScreen()
     {
         setBackground(Color.white);
         setLayout(new BorderLayout());
 
+        orders = fileM.readOrders();
+
         String[] column_name = {
-                "Order ID",
                 "Order Number",
+                "Product ID",
                 "Quantity",
                 "Amount"
         };
 
-        String[][] data = {
-                {"1", "a", "shirt", "300"},
-                {"2", "b", "shirt", "300"},
-                {"3", "c", "shirt", "300"},
-                {"4", "d", "shirt", "300"},
-                {"5", "e", "shirt", "300"},
-                {"6", "f", "shirt", "300"},
-                {"7", "g", "shirt", "300"},
-                {"8", "h", "shirt", "300"},
-                {"9", "i", "shirt", "300"},
-        };
+        String[][] data = new String[orders.size()][4];
 
-        // then construct the table
+
+        for (int i=0; i < orders.size(); i++) {
+            String[] n = {Integer.toString(orders.get(i).getOrder()), Integer.toString(orders.get(i).getPID()), Integer.toString(orders.get(i).getQuantity()), Double.toString(orders.get(i).getAmount())};
+            data[i] = n;
+
+        }
+
+
         JTable ordertable = new JTable(data, column_name);
 
-        // Table configurations
-        ordertable.setAutoCreateRowSorter(true); // sorting when clicked on the header
-        ordertable.setEnabled(false); // disabling the editing
+
+        ordertable.setAutoCreateRowSorter(true);
+        ordertable.setEnabled(false);
         ordertable.setRowHeight(35);
 
         JPanel tableP = new JPanel();
