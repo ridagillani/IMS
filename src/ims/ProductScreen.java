@@ -81,7 +81,15 @@ public class ProductScreen extends JPanel {
 
     }
 
+    void removeProduct () {
+        for (int i = 0; i < products.size(); i++) {
+            if (products.get(i).getPId() == selectedRow) {
+                products.remove(i);
+            }
+        }
 
+        products = fileM.writeProducts(products);
+    }
 
 
     class ProductAction implements ActionListener {
@@ -179,7 +187,7 @@ public class ProductScreen extends JPanel {
             productable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
                 public void valueChanged(ListSelectionEvent event) {
                    if (!event.getValueIsAdjusting()) {
-                       selectedRow = productable.getSelectedRow();
+                       selectedRow = Integer.parseInt(productable.getValueAt(productable.getSelectedRow(), 0).toString());
                    }
                 }
             });
