@@ -1,9 +1,13 @@
 package ims;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 public class ProductScreen extends JPanel {
@@ -11,9 +15,14 @@ public class ProductScreen extends JPanel {
     public ArrayList<Product> products = new ArrayList<Product>();
     fileHandling fileM = new fileHandling();
 
+    int selectedRow;
+
+    JButton remove = new JButton();
+
     JPanel productPanel = new ProductList();
     JPanel addProductPanel = new AddProduct();
     JPanel updateProductPanel = new UpdateProduct();
+
 
     String current = "view";
 
@@ -28,7 +37,6 @@ public class ProductScreen extends JPanel {
         New.setBackground(Color.white);
         New.setFocusable(false);
 
-        JButton remove = new JButton();
         remove.setText("Remove Product");
         remove.setSize(125, 60);
         remove.setForeground(Color.darkGray);
@@ -158,11 +166,24 @@ public class ProductScreen extends JPanel {
 
             }
 
-            JTable productable = new JTable(data, column_name);
+            JTable productable = new JTable(data, column_name) {
+                public boolean isCellEditable(int row, int column) {
+                    return false;
+                }
+            };
 
             productable.setAutoCreateRowSorter(true);
-            productable.setEnabled(false);
             productable.setSelectionBackground(Color.LIGHT_GRAY);
+            productable.setRowSelectionAllowed(true);
+            productable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+                public void valueChanged(ListSelectionEvent event) {
+                   if (!event.getValueIsAdjusting()) {
+                       selectedRow = productable.getSelectedRow();
+                   }
+                }
+            });
+
+
 
             productable.setRowHeight(35);
             viewPanel.add(productable.getTableHeader(), BorderLayout.NORTH);
