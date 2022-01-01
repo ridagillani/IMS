@@ -111,6 +111,7 @@ public class ProductScreen extends JPanel {
                     remove(updateProductPanel);
                 }
 
+                updateProductPanel = new UpdateProduct();
                 add(updateProductPanel, BorderLayout.CENTER);
                 current = "update";
                 revalidate();
@@ -394,25 +395,31 @@ public class ProductScreen extends JPanel {
             JLabel description = new JLabel("Description");
             description.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
             JTextField descriptionf = new JTextField();
+            descriptionf.setText(selected.getDescription());
 
             JLabel quantity = new JLabel("Quantity");
             quantity.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
             JTextField quantityf = new JTextField(20);
+            quantityf.setText(Integer.toString(selected.getPQuantity()));
 
             JLabel price = new JLabel("Price");
             price.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
             JTextField pricef = new JTextField(20);
+            pricef.setText(Double.toString(selected.getPrice()));
 
             JLabel CategoryLabel = new JLabel("Category");
             CategoryLabel.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
 
             String[] s1={"Technology","Grocery","Crockery","Clothing" , "Perfumes"};
             JComboBox j1=new JComboBox(s1);
+            j1.setSelectedItem(selected.getCategory());
 
             JButton edit = new JButton();
             edit.setText("Update");
             edit.setBackground(Color.darkGray);
             edit.setForeground(Color.white);
+            edit.addActionListener(e -> updateProduct(namef.getText(), descriptionf.getText(), quantityf.getText(), pricef.getText(), j1.getSelectedItem().toString()));
+
 
             JButton Cancel = new JButton();
             Cancel.setText("Cancel");
@@ -496,7 +503,38 @@ public class ProductScreen extends JPanel {
                 }
             }
         }
-    }
+
+        void updateProduct (String name, String description, String quantity, String price, String category) {
+            selected.setPname(name);
+            selected.setDescription(description);
+            selected.setPQuantity(Integer.parseInt(quantity));
+            selected.setPrice(Double.parseDouble(price));
+            selected.setCategory(category);
+
+            for (int i = 0; i < products.size(); i++) {
+                if (products.get(i).getPId() == selected.getPId()) {
+                    products.set(i, selected);
+                }
+            }
+
+            products = fileM.writeProducts(products);
+
+
+            JFrame f = new JFrame("Product Update");
+            f.setBounds(300,300, 400,100);
+            f.setLayout(new GridLayout(2,1));
+            JLabel l = new JLabel("The product has been updated");
+
+            JButton b = new JButton("Okay");
+
+            b.addActionListener(e -> {f.dispose();});
+
+            f.add(l);
+            f.add(b);
+            f.show();
+        }
+
+        }
 
 }
 

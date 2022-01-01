@@ -30,10 +30,6 @@ public class Product {
         this.price = price;
     }
 
-    public void setPID(int id)
-    {
-        this.id = id;
-    }
 
     public int getPId()
     {
