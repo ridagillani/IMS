@@ -10,13 +10,15 @@ import java.util.Scanner;
 
 public class fileHandling {
 
+    File productFile = new File("test.csv");
+    File orderFile = new File("orders.csv");
+
 
     public ArrayList<Product> readProduct(){
         ArrayList<Product> products = new ArrayList<>();
 
         try {
-            File file = new File("test.csv");
-            Scanner sc = new Scanner(file);
+            Scanner sc = new Scanner(productFile);
             sc.useDelimiter(";");
             while (sc.hasNext())
             {
@@ -43,8 +45,7 @@ public class fileHandling {
     public ArrayList<Product> writeProducts(ArrayList<Product> prod) {
 
         try {
-            File file = new File("test.csv");
-            FileWriter fw = new FileWriter(file);
+            FileWriter fw = new FileWriter(productFile);
             BufferedWriter bw = new BufferedWriter(fw);
 
             for (int i=0; i < prod.size(); i++)
@@ -63,13 +64,30 @@ public class fileHandling {
         return prod;
     }
 
-    public ArrayList<Product> readOrders(){
-        ArrayList<Product> products = new ArrayList<>();
-        return products;
+    public ArrayList<Order> readOrders(){
+        ArrayList<Order> orders = new ArrayList<>();
+        return orders;
     }
-    public ArrayList<Product> writeOrders(){
-        ArrayList<Product> products = new ArrayList<>();
-        return products;
+    public ArrayList<Order> writeOrders(ArrayList<Order> orders){
+
+        try {
+            FileWriter fw = new FileWriter(orderFile);
+            BufferedWriter bw = new BufferedWriter(fw);
+
+            for (int i=0; i < orders.size(); i++)
+            {
+                bw.write(orders.get(i).getPId() + "," + orders.get(i).getPname() + "," + orders.get(i).getDescription() + "," + orders.get(i).getPQuantity() + "," + orders.get(i).getCategory() + "," + orders.get(i).getPrice() + ";");
+                bw.newLine();
+            }
+
+            bw.close();
+            fw.close();
+
+        } catch (Exception e) {
+            System.out.println("Exception Found");
+        }
+
+        return orders;
     }
 
 }
