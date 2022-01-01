@@ -375,7 +375,12 @@ public class ProductScreen extends JPanel {
 
 
     class UpdateProduct extends JPanel {
+        Product selected;
+
         UpdateProduct() {
+
+            getProduct();
+
             setLayout(new BorderLayout());
 
             JPanel updatePanel = new JPanel();
@@ -384,6 +389,7 @@ public class ProductScreen extends JPanel {
             JLabel name = new JLabel("Name");
             name.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
             JTextField namef = new JTextField();
+            namef.setText(selected.getPname());
 
             JLabel description = new JLabel("Description");
             description.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
@@ -480,6 +486,15 @@ public class ProductScreen extends JPanel {
             add(n2, BorderLayout.WEST);
             add(n3, BorderLayout.EAST);
             add(n4,BorderLayout.SOUTH);
+        }
+
+        void getProduct () {
+            for (int i = 0; i < products.size(); i++) {
+                if (products.get(i).getPId() == selectedRow) {
+                    selected = products.get(i);
+                    break;
+                }
+            }
         }
     }
 
