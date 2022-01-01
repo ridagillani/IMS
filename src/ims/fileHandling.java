@@ -65,6 +65,30 @@ public class fileHandling {
 
     public ArrayList<Order> readOrders(){
         ArrayList<Order> orders = new ArrayList<>();
+
+        try {
+            Scanner sc = new Scanner(orderFile);
+            sc.useDelimiter(";");
+            while (sc.hasNext())
+            {
+                String input = sc.next();
+
+                if (!Objects.equals(input, Character.toString('\n'))) {
+
+                    String[] inputArray = input.split(",");
+
+                    Order order = new Order(Integer.parseInt(inputArray[0].replaceAll("\\s", "")), Integer.parseInt(inputArray[1].replaceAll("\\s", "")), Integer.parseInt(inputArray[2].replaceAll("\\s", "")), Double.parseDouble(inputArray[3].replaceAll("\\s", "")));
+
+                    orders.add(order);
+                }
+
+            }
+            sc.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+
         return orders;
     }
     public ArrayList<Order> writeOrders(ArrayList<Order> orders){
@@ -75,7 +99,7 @@ public class fileHandling {
 
             for (int i=0; i < orders.size(); i++)
             {
-                bw.write(orders.get(i).getPId() + "," + orders.get(i).getPname() + "," + orders.get(i).getDescription() + "," + orders.get(i).getPQuantity() + "," + orders.get(i).getCategory() + "," + orders.get(i).getPrice() + ";");
+                bw.write(orders.get(i).getOrder() + "," + orders.get(i).getPID() + "," + orders.get(i).getQuantity() + "," + orders.get(i).getAmount() + ";");
                 bw.newLine();
             }
 
