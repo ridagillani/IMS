@@ -1,9 +1,7 @@
 package ims;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.util.ArrayList;
 
 class OrderScreen extends JPanel
 {
