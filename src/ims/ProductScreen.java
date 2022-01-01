@@ -158,12 +158,11 @@ public class ProductScreen extends JPanel {
 
             }
 
-            // then construct the table
             JTable productable = new JTable(data, column_name);
 
-            // Table configurations
-            productable.setAutoCreateRowSorter(true); // sorting when clicked on the header
-            productable.setEnabled(false); // disabling the editing
+            productable.setAutoCreateRowSorter(true);
+            productable.setEnabled(false);
+            productable.setSelectionBackground(Color.LIGHT_GRAY);
 
             productable.setRowHeight(35);
             viewPanel.add(productable.getTableHeader(), BorderLayout.NORTH);
