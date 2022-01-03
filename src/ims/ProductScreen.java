@@ -298,7 +298,7 @@ public class ProductScreen extends JPanel {
 
 
             JLabel cost = new JLabel("Cost");
-            price.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            cost.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
 
 
 
@@ -323,45 +323,45 @@ public class ProductScreen extends JPanel {
 
             JPanel nameGroup = new JPanel();
             nameGroup.setLayout(new GridLayout(1, 2));
-            nameGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            nameGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             nameGroup.add(name);
             nameGroup.add(namef);
 
             JPanel descGroup = new JPanel();
             descGroup.setLayout(new GridLayout(1, 2));
-            descGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            descGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             descGroup.add(description);
             descGroup.add(descriptionf);
 
             JPanel priceGroup = new JPanel();
             priceGroup.setLayout(new GridLayout(1, 2));
-            priceGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            priceGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             priceGroup.add(price);
             priceGroup.add(pricef);
 
 
             JPanel costGroup = new JPanel();
             costGroup.setLayout(new GridLayout(1, 2));
-            costGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            costGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             costGroup.add(cost);
             costGroup.add(costf);
 
 
             JPanel quanGroup = new JPanel();
             quanGroup.setLayout(new GridLayout(1, 2));
-            quanGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            quanGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             quanGroup.add(quantity);
             quanGroup.add(quantityf);
 
             JPanel catGroup = new JPanel();
             catGroup.setLayout(new GridLayout(1, 2));
-            catGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            catGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             catGroup.add(CategoryLabel);
             catGroup.add(j1);
 
             JPanel buttGroup = new JPanel();
             buttGroup.setLayout(new GridLayout(1, 2));
-            buttGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            buttGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             buttGroup.add(add);
             buttGroup.add(Cancel);
 
@@ -472,7 +472,7 @@ public class ProductScreen extends JPanel {
             pricef.setText(Double.toString(selected.getPrice()));
 
             JLabel cost = new JLabel("Cost");
-            price.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
+            cost.setBorder(BorderFactory.createEmptyBorder(0,40,0,0));
             JTextField costf = new JTextField(20);
             costf.setText(Double.toString(selected.getCost()));
 
@@ -497,43 +497,43 @@ public class ProductScreen extends JPanel {
 
             JPanel nameGroup = new JPanel();
             nameGroup.setLayout(new GridLayout(1, 2));
-            nameGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            nameGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             nameGroup.add(name);
             nameGroup.add(namef);
 
             JPanel descGroup = new JPanel();
             descGroup.setLayout(new GridLayout(1, 2));
-            descGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            descGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             descGroup.add(description);
             descGroup.add(descriptionf);
 
             JPanel priceGroup = new JPanel();
             priceGroup.setLayout(new GridLayout(1, 2));
-            priceGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            priceGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             priceGroup.add(price);
             priceGroup.add(pricef);
 
             JPanel costGroup = new JPanel();
             costGroup.setLayout(new GridLayout(1, 2));
-            costGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            costGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             costGroup.add(cost);
             costGroup.add(costf);
 
             JPanel quanGroup = new JPanel();
             quanGroup.setLayout(new GridLayout(1, 2));
-            quanGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            quanGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             quanGroup.add(quantity);
             quanGroup.add(quantityf);
 
             JPanel catGroup = new JPanel();
             catGroup.setLayout(new GridLayout(1, 2));
-            catGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            catGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             catGroup.add(CategoryLabel);
             catGroup.add(j1);
 
             JPanel buttGroup = new JPanel();
             buttGroup.setLayout(new GridLayout(1, 2));
-            buttGroup.setBorder(BorderFactory.createEmptyBorder(30, 180, 30, 180));
+            buttGroup.setBorder(BorderFactory.createEmptyBorder(25, 180, 25, 180));
             buttGroup.add(edit);
             buttGroup.add(Cancel);
 
