@@ -18,12 +18,14 @@ public class User extends JFrame {
     ArrayList<CartProduct> cart = new ArrayList<>();
 
     JPanel userPanel = new PurchaseNow();
-    JPanel seePanel = new PurchaseNow();
-
     JPanel cartPanel = new checkCart();
 
-
     String current = "welcome";
+
+    JButton logout = new JButton();
+    JButton cartB = new JButton();
+    JButton dashboard = new JButton();
+
 
     public User()
     {
@@ -45,39 +47,26 @@ public class User extends JFrame {
         heading.setBackground(Color.darkGray);
         heading.setFont(new Font("Cinzel", Font.BOLD, 30));
 
-//        JButton manage = new JButton();
-//        manage.setText("Purchase Now");
-//        manage.setSize(125,60);
-//        manage.setForeground(Color.darkGray);
-//        manage.setBackground(Color.white);
-//        manage.setFocusable(false);
-
-        JButton logout = new JButton();
         logout.setText("Exit");
         logout.setForeground(Color.darkGray);
         logout.setBackground(Color.white);
+        logout.setFocusable(false);
+
         logout.addActionListener(e -> {
             dispose();
-            new NewPage();
-        });
+            new NewPage();});
 
+        cartB.setText("Check Cart");
+        cartB.setForeground(Color.darkGray);
+        cartB.setBackground(Color.white);
+        cartB.setFocusable(false);
 
-
-        JButton orders = new JButton();
-        orders.setText("Check Cart");
-        orders.setForeground(Color.darkGray);
-        orders.setBackground(Color.white);
-        orders.setFocusable(false);
-
-
-        JButton dashboard = new JButton();
         dashboard.setText("Dashboard");
-        dashboard.setForeground(Color.darkGray);
-        dashboard.setBackground(Color.white);
+        dashboard.setBackground(Color.gray);
+        dashboard.setForeground(Color.WHITE);
         dashboard.setFocusable(false);
 
-//        manage.addActionListener(new User.UserAction());
-        orders.addActionListener(new User.UserAction());
+        cartB.addActionListener(new User.UserAction());
         dashboard.addActionListener(new User.UserAction());
 
 
@@ -88,9 +77,8 @@ public class User extends JFrame {
         Container navigation = new Container();
         navigation.setLayout(new GridBagLayout());
         navigation.add(dashboard);
-//        navigation.add(manage);
 
-        navigation.add(orders);
+        navigation.add(cartB);
         navigation.add(logout);
         navigation.setBounds(200,200,400,30);
 
@@ -106,11 +94,15 @@ public class User extends JFrame {
 
         JFrame f = new JFrame("Order Placed");
         f.setBounds(300,300, 400,100);
-        f.setLayout(new GridBagLayout());
-        JLabel l = new JLabel("Done");
+        f.setLayout(new GridLayout(2,1));
+        JLabel l = new JLabel("The order has been confirmed!");
 
+        JButton b = new JButton("Okay");
+        b.setFocusable(false);
+        b.addActionListener(e -> {f.dispose();});
 
         f.add(l);
+        f.add(b);
         f.show();
 
         Order last;
@@ -132,17 +124,15 @@ public class User extends JFrame {
         if (current == "welcome")
         {
             remove(userPanel);
+            dashboard.setBackground(Color.white);
+            dashboard.setForeground(Color.darkGray);
         }
-
-        else if (current == "see")
-        {
-            remove(seePanel);
-        }
-
 
         else if (current == "cart")
         {
             remove(cartPanel);
+            cartB.setBackground(Color.white);
+            cartB.setForeground(Color.darkGray);
         }
 
         cartPanel = new checkCart();
@@ -151,66 +141,33 @@ public class User extends JFrame {
         revalidate();
         repaint();
 
-        try {
-            Thread.sleep(500);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-
-        f.dispose();
     }
 
     class UserAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
 
-             if (e.getActionCommand().equalsIgnoreCase("Purchase Now"))
+
+            if (e.getActionCommand().equalsIgnoreCase("Check Cart"))
             {
                 if (current == "welcome")
                 {
                     remove(userPanel);
+                    dashboard.setBackground(Color.white);
+                    dashboard.setForeground(Color.darkGray);
                 }
-
-                else if (current == "see")
-                {
-                   remove(seePanel);
-                }
-
 
                 else if (current == "cart")
                 {
                     remove(cartPanel);
-                }
-
-                add(seePanel, BorderLayout.CENTER);
-                current = "see";
-                revalidate();
-                repaint();
-
-
-
-            }
-
-            else if (e.getActionCommand().equalsIgnoreCase("Check Cart"))
-            {
-                if (current == "welcome")
-                {
-                    remove(userPanel);
-                }
-
-                else if (current == "see")
-                {
-                    remove(seePanel);
-                }
-
-
-                else if (current == "cart")
-                {
-                   remove(cartPanel);
+                    cartB.setBackground(Color.white);
+                    cartB.setForeground(Color.darkGray);
                 }
 
                 cartPanel = new checkCart();
                 add(cartPanel, BorderLayout.CENTER);
+                cartB.setBackground(Color.gray);
+                cartB.setForeground(Color.WHITE);
                 current = "cart";
                 revalidate();
                 repaint();
@@ -222,19 +179,20 @@ public class User extends JFrame {
                 if (current == "welcome")
                 {
                     remove(userPanel);
-                }
-
-                else if (current == "see")
-                {
-                    remove(seePanel);
+                    dashboard.setBackground(Color.white);
+                    dashboard.setForeground(Color.darkGray);
                 }
 
                 else if (current == "cart")
                 {
                    remove(cartPanel);
+                    cartB.setBackground(Color.white);
+                    cartB.setForeground(Color.darkGray);
                 }
 
                 add(userPanel, BorderLayout.CENTER);
+                dashboard.setBackground(Color.gray);
+                dashboard.setForeground(Color.WHITE);
                 current = "welcome";
                 revalidate();
                 repaint();
@@ -246,13 +204,12 @@ public class User extends JFrame {
     public class checkCart extends JPanel {
 
         JTable cartable;
+
         checkCart()
         {
             JPanel p2 = new JPanel();
             setBackground(Color.white);
             setLayout(new BorderLayout());
-
-
 
             String[] column_name = {
                     "Product ID",
@@ -270,11 +227,9 @@ public class User extends JFrame {
 
             }
 
-
             cartable = new JTable(data, column_name);
 
             cartable.setAutoCreateRowSorter(true);
-
 
             JPanel viewPanel = new JPanel();
             viewPanel.setLayout(new BorderLayout());
@@ -349,7 +304,8 @@ public class User extends JFrame {
             productable.setAutoCreateRowSorter(true);
             productable.setSelectionBackground(Color.LIGHT_GRAY);
             productable.setRowSelectionAllowed(true);
-            productable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
+            productable.getSelectionModel().addListSelectionListener(new ListSelectionListener()
+            {
                 public void valueChanged(ListSelectionEvent event) {
                     if (!event.getValueIsAdjusting()) {
                         selectedRow = Integer.parseInt(productable.getValueAt(productable.getSelectedRow(), 0).toString());
@@ -401,14 +357,20 @@ public class User extends JFrame {
             return false;
         }
 
-        void addToCart () {
-            JFrame f = new JFrame("Product Added to Cart");
+        void addToCart ()
+        {
+            JFrame f = new JFrame("Product Added To Cart");
             f.setBounds(300,300, 400,100);
-            f.setLayout(new GridBagLayout());
-            JLabel l = new JLabel("Done");
+            f.setLayout(new GridLayout(2,1));
+            JLabel l = new JLabel("The product has been added!");
+
+            JButton b = new JButton("Done");
+            b.setFocusable(false);
+            b.addActionListener(e -> {f.dispose();});
 
 
             f.add(l);
+            f.add(b);
             f.show();
 
             getProduct();
@@ -424,14 +386,6 @@ public class User extends JFrame {
                 CartProduct n = new CartProduct(selected.getPId(), selected.getPname(), 1, selected.getPrice(), selected.getCost());
                 cart.add(n);
             }
-
-            try {
-                Thread.sleep(500);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
-
-            f.dispose();
         }
     }
 }
