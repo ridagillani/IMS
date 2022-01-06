@@ -51,6 +51,6 @@ public class Order {
         return amount;
     }
 
-    public double getCost() { return cost; };
+    public double getCost() { return cost; }
 
 }

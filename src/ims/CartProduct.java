@@ -1,8 +1,8 @@
 package ims;
 
 public class CartProduct {
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
     private int quantity;
     private double totalPrice;
     private double totalCost;

@@ -15,7 +15,7 @@ public class Dashboard extends JFrame
     JButton manage = new JButton();
     JButton orders = new JButton();
 
-    String current = "dash";
+    String current;
 
     public Dashboard()
     {
@@ -98,25 +98,22 @@ public class Dashboard extends JFrame
         @Override
         public void actionPerformed(ActionEvent e) {
             if (e.getActionCommand().equalsIgnoreCase("Manage Products")) {
-                if (current == "dash")
-                {
-                    remove(dashPanel);
-                    dashboard.setBackground(Color.white);
-                    dashboard.setForeground(Color.darkGray);
-                }
-
-                else if (current == "manage")
-                {
-                    remove(productPanel);
-                    manage.setBackground(Color.white);
-                    manage.setForeground(Color.darkGray);
-                }
-
-                else if (current == "orders")
-                {
-                    remove(orderPanel);
-                    orders.setBackground(Color.white);
-                    orders.setForeground(Color.darkGray);
+                switch (current) {
+                    case "dash" -> {
+                        remove(dashPanel);
+                        dashboard.setBackground(Color.white);
+                        dashboard.setForeground(Color.darkGray);
+                    }
+                    case "manage" -> {
+                        remove(productPanel);
+                        manage.setBackground(Color.white);
+                        manage.setForeground(Color.darkGray);
+                    }
+                    case "orders" -> {
+                        remove(orderPanel);
+                        orders.setBackground(Color.white);
+                        orders.setForeground(Color.darkGray);
+                    }
                 }
 
 
@@ -132,25 +129,22 @@ public class Dashboard extends JFrame
             else if (e.getActionCommand().equalsIgnoreCase("Check Orders"))
             {
 
-                if (current == "dash")
-                {
-                    remove(dashPanel);
-                    dashboard.setBackground(Color.white);
-                    dashboard.setForeground(Color.darkGray);
-                }
-
-                else if (current == "manage")
-                {
-                    remove(productPanel);
-                    manage.setBackground(Color.white);
-                    manage.setForeground(Color.darkGray);
-                }
-
-                else if (current == "orders")
-                {
-                    remove(orderPanel);
-                    orders.setBackground(Color.white);
-                    orders.setForeground(Color.darkGray);
+                switch (current) {
+                    case "dash" -> {
+                        remove(dashPanel);
+                        dashboard.setBackground(Color.white);
+                        dashboard.setForeground(Color.darkGray);
+                    }
+                    case "manage" -> {
+                        remove(productPanel);
+                        manage.setBackground(Color.white);
+                        manage.setForeground(Color.darkGray);
+                    }
+                    case "orders" -> {
+                        remove(orderPanel);
+                        orders.setBackground(Color.white);
+                        orders.setForeground(Color.darkGray);
+                    }
                 }
 
                 add(orderPanel, BorderLayout.CENTER);
@@ -163,26 +157,22 @@ public class Dashboard extends JFrame
 
             else if (e.getActionCommand().equalsIgnoreCase("Dashboard"))
             {
-                if (current == "dash")
-                {
-                    remove(dashPanel);
-                    dashboard.setBackground(Color.white);
-                    dashboard.setForeground(Color.darkGray);
-                    System.out.println("Working");
-                }
-
-                else if (current == "manage")
-                {
-                    remove(productPanel);
-                    manage.setBackground(Color.white);
-                    manage.setForeground(Color.darkGray);
-                }
-
-                else if (current == "orders")
-                {
-                    remove(orderPanel);
-                    orders.setBackground(Color.white);
-                    orders.setForeground(Color.darkGray);
+                switch (current) {
+                    case "dash" -> {
+                        remove(dashPanel);
+                        dashboard.setBackground(Color.white);
+                        dashboard.setForeground(Color.darkGray);
+                    }
+                    case "manage" -> {
+                        remove(productPanel);
+                        manage.setBackground(Color.white);
+                        manage.setForeground(Color.darkGray);
+                    }
+                    case "orders" -> {
+                        remove(orderPanel);
+                        orders.setBackground(Color.white);
+                        orders.setForeground(Color.darkGray);
+                    }
                 }
 
                 add(dashPanel, BorderLayout.CENTER);

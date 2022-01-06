@@ -36,7 +36,7 @@ public class fileHandling {
             sc.close();
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         return products;
@@ -47,9 +47,8 @@ public class fileHandling {
             FileWriter fw = new FileWriter(productFile);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            for (int i=0; i < prod.size(); i++)
-            {
-                bw.write(prod.get(i).getPId() + "," + prod.get(i).getPname() + "," + prod.get(i).getDescription() + "," + prod.get(i).getPQuantity() + "," + prod.get(i).getCategory() + "," + prod.get(i).getPrice() + "," + prod.get(i).getCost() + ";");
+            for (Product product : prod) {
+                bw.write(product.getPId() + "," + product.getPname() + "," + product.getDescription() + "," + product.getPQuantity() + "," + product.getCategory() + "," + product.getPrice() + "," + product.getCost() + ";");
                 bw.newLine();
             }
 
@@ -86,7 +85,7 @@ public class fileHandling {
             sc.close();
 
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
 
         return orders;
@@ -97,9 +96,8 @@ public class fileHandling {
             FileWriter fw = new FileWriter(orderFile);
             BufferedWriter bw = new BufferedWriter(fw);
 
-            for (int i=0; i < orders.size(); i++)
-            {
-                bw.write(orders.get(i).getOrder() + "," + orders.get(i).getPID() + "," + orders.get(i).getQuantity() + "," + orders.get(i).getAmount() + "," + orders.get(i).getCost() + ";");
+            for (Order order : orders) {
+                bw.write(order.getOrder() + "," + order.getPID() + "," + order.getQuantity() + "," + order.getAmount() + "," + order.getCost() + ";");
                 bw.newLine();
             }
 

@@ -92,15 +92,15 @@ public class MainDash extends JPanel {
     }
 
     void calculate () {
-        for (int i = 0; i < products.size(); i++) {
-            available = available + products.get(i).getPQuantity();
+        for (Product product : products) {
+            available = available + product.getPQuantity();
         }
         double cost = 0;
 
-        for (int j = 0; j < orders.size(); j++) {
-            sold = sold + orders.get(j).getQuantity();
-            revenue = revenue + orders.get(j).getAmount();
-            cost = cost + orders.get(j).getCost();
+        for (Order order : orders) {
+            sold = sold + order.getQuantity();
+            revenue = revenue + order.getAmount();
+            cost = cost + order.getCost();
 
             profitA = revenue - cost;
         }

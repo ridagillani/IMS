@@ -1,18 +1,14 @@
 package ims;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.util.ArrayList;
 
 public class ProductScreen extends JPanel {
 
-    ArrayList<Product> products = new ArrayList<Product>();
+    ArrayList<Product> products = new ArrayList<>();
     fileHandling fileM = new fileHandling();
 
     int selectedRow;
@@ -95,12 +91,12 @@ public class ProductScreen extends JPanel {
             removeProduct();
             f.dispose();
         });
-        b2.addActionListener(e -> {f.dispose();});
+        b2.addActionListener(e -> f.dispose());
 
         f.add(l);
         f.add(b);
         f.add(b2);
-        f.show();
+        f.setVisible(true);
 
     }
 
@@ -115,12 +111,10 @@ public class ProductScreen extends JPanel {
         products = fileM.writeProducts(products);
 
 
-        if (current == "view") {
-            remove(productPanel);
-        } else if (current == "add") {
-            remove(addProductPanel);
-        } else if (current == "update") {
-            remove(updateProductPanel);
+        switch (current) {
+            case "view" -> remove(productPanel);
+            case "add" -> remove(addProductPanel);
+            case "update" -> remove(updateProductPanel);
         }
 
         productPanel = new ProductList();
@@ -137,12 +131,10 @@ public class ProductScreen extends JPanel {
         public void actionPerformed(ActionEvent e) {
             products = fileM.readProduct();
             if (e.getActionCommand().equalsIgnoreCase("Add New Product")) {
-                if (current == "view") {
-                    remove(productPanel);
-                } else if (current == "add") {
-                    remove(addProductPanel);
-                } else if (current == "update") {
-                    remove(updateProductPanel);
+                switch (current) {
+                    case "view" -> remove(productPanel);
+                    case "add" -> remove(addProductPanel);
+                    case "update" -> remove(updateProductPanel);
                 }
 
                 add(addProductPanel, BorderLayout.CENTER);
@@ -151,12 +143,10 @@ public class ProductScreen extends JPanel {
                 repaint();
             }
             else if (e.getActionCommand().equalsIgnoreCase("Edit Product")) {
-                if (current == "view") {
-                    remove(productPanel);
-                } else if (current == "add") {
-                    remove(addProductPanel);
-                } else if (current == "update") {
-                    remove(updateProductPanel);
+                switch (current) {
+                    case "view" -> remove(productPanel);
+                    case "add" -> remove(addProductPanel);
+                    case "update" -> remove(updateProductPanel);
                 }
 
                 updateProductPanel = new UpdateProduct();
@@ -168,12 +158,10 @@ public class ProductScreen extends JPanel {
 
             else if (e.getActionCommand().equalsIgnoreCase("View Products")) {
 
-                if (current == "view") {
-                    remove(productPanel);
-                } else if (current == "add") {
-                    remove(addProductPanel);
-                } else if (current == "update") {
-                    remove(updateProductPanel);
+                switch (current) {
+                    case "view" -> remove(productPanel);
+                    case "add" -> remove(addProductPanel);
+                    case "update" -> remove(updateProductPanel);
                 }
 
                 productPanel = new ProductList();
@@ -225,12 +213,10 @@ public class ProductScreen extends JPanel {
             productable.setAutoCreateRowSorter(true);
             productable.setSelectionBackground(Color.LIGHT_GRAY);
             productable.setRowSelectionAllowed(true);
-            productable.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-                public void valueChanged(ListSelectionEvent event) {
-                   if (!event.getValueIsAdjusting()) {
-                       selectedRow = Integer.parseInt(productable.getValueAt(productable.getSelectedRow(), 0).toString());
-                   }
-                }
+            productable.getSelectionModel().addListSelectionListener(event -> {
+               if (!event.getValueIsAdjusting()) {
+                   selectedRow = Integer.parseInt(productable.getValueAt(productable.getSelectedRow(), 0).toString());
+               }
             });
 
 
@@ -426,11 +412,11 @@ public class ProductScreen extends JPanel {
 
             JButton b = new JButton("Okay");
 
-            b.addActionListener(e -> {f.dispose();});
+            b.addActionListener(e -> f.dispose());
 
             f.add(l);
             f.add(b);
-            f.show();
+            f.setVisible(true);
 
 
         }
@@ -572,9 +558,9 @@ public class ProductScreen extends JPanel {
         }
 
         void getProduct () {
-            for (int i = 0; i < products.size(); i++) {
-                if (products.get(i).getPId() == selectedRow) {
-                    selected = products.get(i);
+            for (Product product : products) {
+                if (product.getPId() == selectedRow) {
+                    selected = product;
                     break;
                 }
             }
@@ -604,11 +590,11 @@ public class ProductScreen extends JPanel {
 
             JButton b = new JButton("Okay");
 
-            b.addActionListener(e -> {f.dispose();});
+            b.addActionListener(e -> f.dispose());
 
             f.add(l);
             f.add(b);
-            f.show();
+            f.setVisible(true);
         }
 
         }

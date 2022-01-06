@@ -9,8 +9,6 @@ import java.awt.event.ActionListener;
 class NewPage extends JFrame
 {
 
-    private ButtonGroup buttons = new ButtonGroup();
-
     public NewPage()
     {
 
@@ -40,6 +38,8 @@ class NewPage extends JFrame
         user.setForeground(Color.darkGray);
         user.setFont(new Font("Cinzel", Font.BOLD, 15));
         user.setFocusable(false);
+
+        ButtonGroup buttons = new ButtonGroup();
 
         panel.add(user);
         buttons.add(user);

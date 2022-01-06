@@ -1,8 +1,6 @@
 package ims;
 
 import javax.swing.*;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -99,11 +97,11 @@ public class User extends JFrame {
 
         JButton b = new JButton("Okay");
         b.setFocusable(false);
-        b.addActionListener(e -> {f.dispose();});
+        b.addActionListener(e -> f.dispose());
 
         f.add(l);
         f.add(b);
-        f.show();
+        f.setVisible(true);
 
         Order last;
         int id = 0;
@@ -112,27 +110,34 @@ public class User extends JFrame {
             id = last.getOrder() + 1;
         }
 
-        for (int i = 0; i < cart.size(); i++) {
-            Order n = new Order(id, cart.get(i).getId(), cart.get(i).getQuantity(), cart.get(i).getTotalPrice(), cart.get(i).getTotalCost());
+        for (CartProduct cartProduct : cart) {
+            Order n = new Order(id, cartProduct.getId(), cartProduct.getQuantity(), cartProduct.getTotalPrice(), cartProduct.getTotalCost());
             orders.add(n);
 
+            for (Product product : products) {
+                if (product.getPId() == cartProduct.getId()) {
+                    product.setPQuantity(product.getPQuantity() - cartProduct.getQuantity());
+                }
+            }
+
         }
+
         orders = fileM.writeOrders(orders);
+        products = fileM.writeProducts(products);
 
         cart = new ArrayList<>();
 
-        if (current == "welcome")
-        {
-            remove(userPanel);
-            dashboard.setBackground(Color.white);
-            dashboard.setForeground(Color.darkGray);
-        }
-
-        else if (current == "cart")
-        {
-            remove(cartPanel);
-            cartB.setBackground(Color.white);
-            cartB.setForeground(Color.darkGray);
+        switch (current) {
+            case "welcome" -> {
+                remove(userPanel);
+                dashboard.setBackground(Color.white);
+                dashboard.setForeground(Color.darkGray);
+            }
+            case "cart" -> {
+                remove(cartPanel);
+                cartB.setBackground(Color.white);
+                cartB.setForeground(Color.darkGray);
+            }
         }
 
         cartPanel = new checkCart();
@@ -150,18 +155,17 @@ public class User extends JFrame {
 
             if (e.getActionCommand().equalsIgnoreCase("Check Cart"))
             {
-                if (current == "welcome")
-                {
-                    remove(userPanel);
-                    dashboard.setBackground(Color.white);
-                    dashboard.setForeground(Color.darkGray);
-                }
-
-                else if (current == "cart")
-                {
-                    remove(cartPanel);
-                    cartB.setBackground(Color.white);
-                    cartB.setForeground(Color.darkGray);
+                switch (current) {
+                    case "welcome" -> {
+                        remove(userPanel);
+                        dashboard.setBackground(Color.white);
+                        dashboard.setForeground(Color.darkGray);
+                    }
+                    case "cart" -> {
+                        remove(cartPanel);
+                        cartB.setBackground(Color.white);
+                        cartB.setForeground(Color.darkGray);
+                    }
                 }
 
                 cartPanel = new checkCart();
@@ -176,18 +180,17 @@ public class User extends JFrame {
 
             else if (e.getActionCommand().equalsIgnoreCase("Dashboard"))
             {
-                if (current == "welcome")
-                {
-                    remove(userPanel);
-                    dashboard.setBackground(Color.white);
-                    dashboard.setForeground(Color.darkGray);
-                }
-
-                else if (current == "cart")
-                {
-                   remove(cartPanel);
-                    cartB.setBackground(Color.white);
-                    cartB.setForeground(Color.darkGray);
+                switch (current) {
+                    case "welcome" -> {
+                        remove(userPanel);
+                        dashboard.setBackground(Color.white);
+                        dashboard.setForeground(Color.darkGray);
+                    }
+                    case "cart" -> {
+                        remove(cartPanel);
+                        cartB.setBackground(Color.white);
+                        cartB.setForeground(Color.darkGray);
+                    }
                 }
 
                 add(userPanel, BorderLayout.CENTER);
@@ -304,12 +307,9 @@ public class User extends JFrame {
             productable.setAutoCreateRowSorter(true);
             productable.setSelectionBackground(Color.LIGHT_GRAY);
             productable.setRowSelectionAllowed(true);
-            productable.getSelectionModel().addListSelectionListener(new ListSelectionListener()
-            {
-                public void valueChanged(ListSelectionEvent event) {
-                    if (!event.getValueIsAdjusting()) {
-                        selectedRow = Integer.parseInt(productable.getValueAt(productable.getSelectedRow(), 0).toString());
-                    }
+            productable.getSelectionModel().addListSelectionListener(event -> {
+                if (!event.getValueIsAdjusting()) {
+                    selectedRow = Integer.parseInt(productable.getValueAt(productable.getSelectedRow(), 0).toString());
                 }
             });
 
@@ -340,17 +340,17 @@ public class User extends JFrame {
         }
 
         void getProduct () {
-            for (int i = 0; i < products.size(); i++) {
-                if (products.get(i).getPId() == selectedRow) {
-                    selected = products.get(i);
+            for (Product product : products) {
+                if (product.getPId() == selectedRow) {
+                    selected = product;
                     break;
                 }
             }
         }
 
         boolean inCart () {
-            for (int i = 0; i < cart.size(); i++) {
-                if (cart.get(i).getId() == selected.getPId()) {
+            for (CartProduct cartProduct : cart) {
+                if (cartProduct.getId() == selected.getPId()) {
                     return true;
                 }
             }
@@ -366,19 +366,19 @@ public class User extends JFrame {
 
             JButton b = new JButton("Done");
             b.setFocusable(false);
-            b.addActionListener(e -> {f.dispose();});
+            b.addActionListener(e -> f.dispose());
 
 
             f.add(l);
             f.add(b);
-            f.show();
+            f.setVisible(true);
 
             getProduct();
 
             if (inCart()) {
-                for (int i = 0; i < cart.size(); i++) {
-                    if (cart.get(i).getId() == selected.getPId()) {
-                        cart.get(i).addOne(selected.getPrice(), selected.getCost());
+                for (CartProduct cartProduct : cart) {
+                    if (cartProduct.getId() == selected.getPId()) {
+                        cartProduct.addOne(selected.getPrice(), selected.getCost());
                         break;
                     }
                 }
