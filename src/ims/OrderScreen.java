@@ -8,7 +8,7 @@ import java.util.ArrayList;
 class OrderScreen extends JPanel
 {
     ArrayList<Order> orders;
-    fileHandling fileM = new fileHandling();
+    FileHandling fileM = new FileHandling();
 
 
     OrderScreen()

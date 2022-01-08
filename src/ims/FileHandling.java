@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Scanner;
 
-public class fileHandling {
+public class FileHandling {
 
-    File productFile = new File("test.csv");
+    File productFile = new File("products.csv");
     File orderFile = new File("orders.csv");
 
 

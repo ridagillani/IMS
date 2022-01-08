@@ -21,7 +21,6 @@ public class Dashboard extends JFrame
     {
         setTitle("Admin Dashboard");
         setSize(1280,720);
-        setVisible(true);
         setResizable(false);
         setLayout(new BorderLayout());
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -91,6 +90,7 @@ public class Dashboard extends JFrame
         dashboard.setBackground(Color.gray);
         dashboard.setForeground(Color.WHITE);
         current = "dash";
+        setVisible(true);
 
     }
 

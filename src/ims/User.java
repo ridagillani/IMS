@@ -10,7 +10,7 @@ public class User extends JFrame {
     ArrayList<Product> products = new ArrayList<>();
     ArrayList<Order> orders = new ArrayList<>();
 
-    fileHandling fileM = new fileHandling();
+    FileHandling fileM = new FileHandling();
 
     int selectedRow;
     ArrayList<CartProduct> cart = new ArrayList<>();

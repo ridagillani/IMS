@@ -14,7 +14,6 @@ class NewPage extends JFrame
 
         setTitle("Inventory Management System");
         setSize(1280,720);
-        setVisible(true);
         setResizable(false);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,6 +60,7 @@ class NewPage extends JFrame
         admin.addActionListener(new Action());
 
         add(panel);
+        setVisible(true);
 
     }
 

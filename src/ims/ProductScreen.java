@@ -8,8 +8,9 @@ import java.util.ArrayList;
 
 public class ProductScreen extends JPanel {
 
-    ArrayList<Product> products = new ArrayList<>();
-    fileHandling fileM = new fileHandling();
+    FileHandling fileM = new FileHandling();
+    ArrayList<Product> products = fileM.readProduct();
+
 
     int selectedRow;
 
@@ -430,7 +431,7 @@ public class ProductScreen extends JPanel {
 
         UpdateProduct() {
 
-            getProduct();
+            getSelectedProduct();
 
             setLayout(new BorderLayout());
 
@@ -557,7 +558,7 @@ public class ProductScreen extends JPanel {
             add(n4,BorderLayout.SOUTH);
         }
 
-        void getProduct () {
+        void getSelectedProduct () {
             for (Product product : products) {
                 if (product.getPId() == selectedRow) {
                     selected = product;

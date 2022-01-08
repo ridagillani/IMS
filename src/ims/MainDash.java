@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class MainDash extends JPanel {
-    fileHandling fileM = new fileHandling();
+    FileHandling fileM = new FileHandling();
 
     ArrayList<Product> products = fileM.readProduct();
     ArrayList<Order> orders = fileM.readOrders();
@@ -95,6 +95,7 @@ public class MainDash extends JPanel {
         for (Product product : products) {
             available = available + product.getPQuantity();
         }
+
         double cost = 0;
 
         for (Order order : orders) {
