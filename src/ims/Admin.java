@@ -71,7 +71,7 @@ public class Admin extends JFrame {
             String userValue = username.getText();
             String passValue = password.getText();
 
-            if (userValue.equals("") && passValue.equals("")) {  //if authentic, navigate user to a new page
+            if (userValue.equals("admin") && passValue.equals("")) {  //if authentic, navigate user to a new page
 
                 new Dashboard();
                 dispose();
