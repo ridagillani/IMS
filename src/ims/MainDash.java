@@ -105,8 +105,6 @@ public class MainDash extends JPanel {
 
             profitA = revenue - cost;
         }
-
-        System.out.println(cost);
     }
 
 }
